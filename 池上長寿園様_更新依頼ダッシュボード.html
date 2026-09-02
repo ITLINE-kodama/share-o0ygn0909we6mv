@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>池上長寿園様 更新依頼ダッシュボード</title>
+<style>
+  :root{
+    /* 池上長寿園様サイト（デザイン案A）の配色に合わせたトーン */
+    --navy:#d95c07;      /* 主要アクション・見出し帯（白文字が読める濃さ） */
+    --navy-d:#a3450a;    /* 見出し文字 */
+    --accent:#f7701b;    /* アクセント（現行サイトのオレンジ） */
+    --ink:#4a3f33; --gray:#7b7166; --head:#3d372f;   /* 見出し文字＝落ち着いた濃色 */
+    /* 作業枠メーター：通常は青、上限が近づくとオレンジ（警告） */
+    --meter-fill:#2563eb; --meter-fill2:#9dbdf2; --meter-track:#d7e5fa;
+    --meter-warn:#d95c07; --meter-warn2:#f3b183;
+    --line:#e8e2da; --bg:#f7f6f4; --card:#fff;
+    --green:#2e8b57; --green-bg:#e8f4ec;
+    --orange:#a06a00; --orange-bg:#fdf3dc;   /* 受付待ち＝ゴールド系 */
+    --blue-bg:#fff3e6;   /* 選択行・弊社側の淡色＝クリーム */
+    --red:#c0392b; --red-bg:#fbeae8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Noto Sans JP","Yu Gothic Medium","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:14px;position:relative;overflow-x:hidden;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 20px 60px;}
+  .demo-chip{display:inline-block;background:var(--red-bg);color:var(--red);border:1px solid #f0c9c4;border-radius:999px;font-size:10.5px;font-weight:700;padding:1px 12px;margin-left:10px;vertical-align:2px;letter-spacing:.06em;}
+
+  header.top{background:#fff;color:var(--ink);padding:20px 0 18px;border-top:2px solid var(--accent);border-bottom:1px solid var(--line);}
+  .top .inner{max-width:1240px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+  .top .ttl .en{font-size:10.5px;letter-spacing:.3em;color:var(--gray);font-weight:700;}
+  .top .ttl h1{font-size:21px;line-height:1.4;margin-top:2px;color:var(--head);}
+  .top .ttl .sub{font-size:11.5px;color:var(--gray);margin-top:2px;}
+  .cds{display:flex;gap:12px;align-items:center;}
+  .cd-box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 20px;text-align:center;}
+  .cd-box .lbl{font-size:10.5px;color:var(--gray);}
+  .cd-box .num{font-size:24px;font-weight:700;line-height:1.2;color:var(--head);}
+  .cd-box .num small{font-size:11px;font-weight:500;}
+  .cd-box.hl{background:#fff8f1;border-color:#f0dcc6;}
+  .cd-box.hl .lbl{color:var(--gray);}
+  .cd-box.hl .num{color:var(--navy);}
+
+
+  .statusbar{background:#fff;border-bottom:1px solid var(--line);}
+  .statusbar .inner{max-width:1240px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;flex-wrap:wrap;gap:18px;font-size:12px;color:var(--gray);}
+  .statusbar b{color:var(--ink);font-size:14px;}
+
+  h2.sec{font-size:16.5px;color:var(--head);margin:26px 0 12px;display:flex;align-items:center;gap:10px;}
+  h2.sec::before{content:"";width:3px;height:18px;background:var(--accent);border-radius:2px;display:inline-block;}
+  h2.sec .note{font-size:11.5px;color:var(--gray);font-weight:400;}
+
+  .cta{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:14px;
+       padding:20px 26px;margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+       box-shadow:0 3px 12px rgba(120,80,40,.07);}
+  .cta .tx b{display:block;font-size:19px;color:var(--head);line-height:1.5;}
+  .cta .tx span{display:block;font-size:12.5px;color:var(--gray);margin-top:3px;}
+  .ctabtn{border:0;border-radius:12px;background:var(--navy);color:#fff;font-size:16px;font-weight:700;
+          padding:15px 38px;cursor:pointer;font-family:inherit;white-space:nowrap;box-shadow:0 3px 10px rgba(217,92,7,.35);}
+  .ctabtn:hover{background:#c2560a;}
+  @media(max-width:760px){ .cta{padding:16px 18px;} .cta .tx b{font-size:16.5px;} .ctabtn{width:100%;font-size:15px;padding:14px;} }
+  .meter{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;box-shadow:0 3px 12px rgba(120,80,40,.08);}
+  .meter .row{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;}
+  .meter .big{font-size:22px;font-weight:700;color:var(--head);}
+  .meter .big + small{font-size:12px;color:var(--gray);margin-left:6px;}
+  .meter .rest{font-size:12.5px;color:var(--gray);}
+  .bar{height:14px;border-radius:999px;background:var(--meter-track);margin-top:12px;overflow:hidden;display:flex;}
+  .bar i{display:block;height:100%;}
+  .bar .done{background:var(--meter-fill);}
+  .bar .doing{background:var(--meter-fill2);}
+  .legend{display:flex;gap:16px;margin-top:10px;font-size:11.5px;color:var(--gray);flex-wrap:wrap;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .legend i{width:14px;height:10px;border-radius:3px;display:inline-block;}
+  .legend i.sw-done{background:var(--meter-fill);}
+  .legend i.sw-doing{background:var(--meter-fill2);}
+  .legend i.sw-rest{background:var(--meter-track);}
+  /* 作業枠の残りが少なくなったときの警告表示 */
+  .meter.warn .bar .done,.meter.warn .legend i.sw-done{background:var(--meter-warn);}
+  .meter.warn .bar .doing,.meter.warn .legend i.sw-doing{background:var(--meter-warn2);}
+  .meter .alert{display:none;margin-top:10px;background:#fdf1e3;border:1px solid #f0c9a3;border-radius:8px;
+                padding:8px 14px;font-size:12px;color:var(--navy);font-weight:700;}
+  .meter.warn .alert{display:block;}
+  .meter .hintline{margin-top:10px;font-size:11.5px;color:var(--gray);}
+
+  .cols{display:grid;grid-template-columns:400px 1fr;gap:18px;align-items:start;}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 3px 12px rgba(120,80,40,.08);overflow:hidden;}
+  .panel .hd{background:#fff;color:var(--head);padding:12px 18px;font-size:14px;font-weight:700;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);border-left:3px solid var(--accent);}
+  .panel .hd .cnt{background:#f1efec;color:var(--gray);border-radius:999px;padding:1px 12px;font-size:11.5px;}
+
+  .newbtn{display:block;width:calc(100% - 28px);margin:14px;padding:13px;border:0;border-radius:10px;background:var(--navy);color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(217,92,7,.30);}
+  .newbtn:hover{background:#c2560a;}
+  .filters{display:flex;gap:6px;padding:0 14px 12px;flex-wrap:wrap;}
+  .filters button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 14px;font-size:11.5px;color:var(--gray);cursor:pointer;font-family:inherit;}
+  .filters button.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700;}
+
+  .tasks{list-style:none;border-top:1px solid var(--line);max-height:560px;overflow-y:auto;}
+  .tasks li{padding:13px 18px;border-bottom:1px solid var(--line);cursor:pointer;}
+  .tasks li:hover{background:#fbfaf8;}
+  .tasks li.on{background:var(--blue-bg);box-shadow:inset 3px 0 0 var(--accent);}
+  .tasks .l1{display:flex;align-items:center;gap:8px;}
+  .tasks .id{font-size:11px;color:var(--gray);font-family:Consolas,monospace;}
+  .tasks .nm{font-size:13.5px;font-weight:700;color:var(--head);margin-top:3px;line-height:1.45;}
+  .tasks .l3{display:flex;gap:12px;margin-top:4px;font-size:11.5px;color:var(--gray);flex-wrap:wrap;}
+  .st{font-size:10.5px;font-weight:700;border-radius:6px;padding:1px 9px;white-space:nowrap;}
+  .st.wait{background:var(--orange-bg);color:var(--orange);}
+  .st.doing{background:var(--blue-bg);color:var(--navy);}
+  .st.check{background:var(--red-bg);color:var(--red);}
+  .st.done{background:var(--green-bg);color:var(--green);}
+
+  .dt .hdrow{padding:16px 22px 12px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap;}
+  .dt h3{font-size:17px;color:var(--head);line-height:1.45;}
+  .dt .meta{display:flex;gap:22px;margin-top:10px;flex-wrap:wrap;font-size:12px;color:var(--gray);}
+  .dt .meta b{color:var(--ink);}
+  .time{background:var(--blue-bg);border-radius:10px;padding:6px 16px;text-align:center;flex:0 0 auto;}
+  .time .lbl{font-size:10.5px;color:var(--gray);}
+  .time .num{font-size:17px;font-weight:700;color:var(--head);line-height:1.3;}
+
+  .thread{padding:18px 22px;max-height:420px;overflow-y:auto;background:#fbfbfa;}
+  .msg{display:flex;gap:10px;margin-bottom:16px;}
+  .msg .who{flex:0 0 44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;text-align:center;line-height:1.25;}
+  .msg.you .who{background:var(--orange-bg);color:var(--orange);}
+  .msg.us .who{background:var(--green-bg);color:var(--green);}
+  .msg .bd{flex:1;min-width:0;}
+  .msg .nmrow{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .msg .nm{font-size:12.5px;font-weight:700;color:var(--head);}
+  .msg .tm{font-size:11px;color:var(--gray);}
+  .msg .tx{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-top:5px;font-size:13px;white-space:pre-wrap;}
+  .msg.you .tx{background:#fffaf4;border-color:#f0dcc6;}
+  .thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+  .thumbs figure{width:104px;}
+  .thumbs img{width:104px;height:78px;object-fit:cover;border-radius:8px;border:1px solid var(--line);display:block;}
+  .thumbs .fileicon{width:104px;height:78px;border-radius:8px;border:1px solid var(--line);background:#f1efec;color:var(--gray);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+  .thumbs figcaption{font-size:10px;color:var(--gray);margin-top:3px;word-break:break-all;line-height:1.35;}
+
+  .composer{border-top:1px solid var(--line);padding:14px 22px 18px;}
+  .drop{border:2px dashed #d9d3ca;border-radius:12px;background:#fbfbfa;padding:16px;text-align:center;color:var(--gray);font-size:12.5px;cursor:pointer;transition:.15s;}
+  .drop.over{border-color:var(--accent);background:var(--blue-bg);color:var(--head);}
+  .drop b{display:block;color:var(--head);font-size:13.5px;margin-bottom:3px;}
+  .composer textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-family:inherit;font-size:13px;resize:vertical;min-height:76px;margin-top:12px;color:var(--ink);}
+  .crow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap;}
+  .hint{font-size:11.5px;color:var(--gray);}
+  .send{border:0;border-radius:10px;background:var(--navy);color:#fff;font-weight:700;font-size:13px;padding:10px 26px;cursor:pointer;font-family:inherit;}
+
+  .modal{position:fixed;inset:0;background:rgba(74,63,51,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:50;}
+  .modal.on{display:flex;}
+  .modal .box{background:#fff;border-radius:16px;width:100%;max-width:620px;max-height:92vh;overflow-y:auto;}
+  .modal .mh{background:#fff;color:var(--head);padding:14px 22px;font-size:15px;font-weight:700;border-radius:16px 16px 0 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);border-left:3px solid var(--accent);}
+  .modal .mh button{background:none;border:0;color:var(--gray);font-size:20px;cursor:pointer;line-height:1;}
+  .modal .mb{padding:18px 22px 22px;}
+  .fld{margin-bottom:14px;}
+  .fld label{display:block;font-size:12.5px;font-weight:700;color:var(--head);margin-bottom:5px;}
+  .fld input,.fld textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 13px;font-family:inherit;font-size:13px;color:var(--ink);}
+  .fld textarea{min-height:96px;resize:vertical;}
+  .req{color:var(--red);font-size:11px;margin-left:5px;}
+
+  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);color:#a3968a;font-size:11.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media(max-width:900px){
+    .cols{grid-template-columns:1fr;}
+    .tasks{max-height:none;}
+  }
+  @media(max-width:760px){
+    .top .ttl h1{font-size:16.5px;}
+    .cds{width:100%;}
+    .cd-box{flex:1;padding:8px 10px;}
+    .statusbar .inner{gap:10px;}
+    h2.sec{flex-wrap:wrap;}
+    h2.sec .note{flex:1 1 100%;margin-left:15px;margin-top:-4px;}
+    .dt .meta{gap:12px;}
+    .msg .who{flex:0 0 38px;height:38px;font-size:10px;}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="inner">
+    <div class="ttl">
+      <div class="en">UPDATE REQUEST DASHBOARD<span class="demo-chip">画面イメージ（サンプルデータ）</span></div>
+      <h1>社会福祉法人 池上長寿園様　更新依頼ダッシュボード</h1>
+      <div class="sub">株式会社インフォネット × 株式会社ITLINE　｜　最終更新：2027年12月10日 17:30</div>
+    </div>
+    <div class="cds">
+      <div class="cd-box"><div class="lbl">今月のご依頼</div><div class="num" id="cdReq">12<small>件</small></div></div>
+      <div class="cd-box hl"><div class="lbl">今月の作業枠 残り</div><div class="num" id="cdRest">2<small>時間</small>15<small>分</small></div></div>
+      <button class="ctabtn" id="btnNewHd" style="font-size:14px;padding:13px 24px;">＋ 更新を依頼する</button>
+    </div>
+  </div>
+</header>
+
+
+<div class="statusbar">
+  <div class="inner">
+    <div>受付待ち：<b id="nWait">1</b> 件</div>
+    <div>対応中：<b id="nDoing">1</b> 件</div>
+    <div>ご確認待ち：<b id="nCheck">1</b> 件</div>
+    <div>今月完了：<b id="nDone">9</b> 件</div>
+    <div style="margin-left:auto;">ご依頼の受付：24時間　／　ご返答：平日 9:00〜18:00・原則1営業日以内</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="cta">
+    <div class="tx"><b>更新のご依頼はこちらから</b>
+      <span>件名とご依頼の内容をご記入いただければ受け付けます。写真・資料はドラッグ＆ドロップで添付できます。</span></div>
+    <button class="ctabtn" id="btnNewTop">＋ 新しい更新を依頼する</button>
+  </div>
+
+  <h2 class="sec">今月の作業枠 <span class="note">月額保守に含まれる作業枠（月5時間程度）の使用状況です</span></h2>
+  <div class="meter">
+    <div class="row">
+      <div><span class="big" id="mUsed">2時間45分</span><small>／ 5時間</small></div>
+      <div class="rest">残り <b id="mRest">2時間15分</b>　｜　作業枠を超える見込みになった時点で、時間と費用をご提示します</div>
+    </div>
+    <div class="bar"><i class="done" id="barDone" style="width:45%"></i><i class="doing" id="barDoing" style="width:10%"></i></div>
+    <div class="legend">
+      <span><i class="sw-done"></i>完了した作業</span>
+      <span><i class="sw-doing"></i>対応中の作業（見込み）</span>
+      <span><i class="sw-rest"></i>残りの作業枠</span>
+    </div>
+    <div class="alert" id="mAlert">残りの作業枠が少なくなっています。超過する見込みになった時点で、時間と費用をご提示します。</div>
+    <div class="hintline">※ 使用が8割を超えると、バーがオレンジに変わってお知らせします。</div>
+  </div>
+
+  <h2 class="sec">更新のご依頼 <span class="note">左の一覧からご依頼を選ぶと、右にやり取りが表示されます</span></h2>
+  <div class="cols">
+    <div class="panel">
+      <div class="hd">タスク一覧<span class="cnt" id="taskCnt">12件</span></div>
+      <button class="newbtn" id="btnNew">＋ 新しい更新を依頼する</button>
+      <div class="filters">
+        <button class="on" data-f="all">すべて</button>
+        <button data-f="open">対応中のみ</button>
+        <button data-f="done">完了</button>
+      </div>
+      <ul class="tasks" id="taskList"></ul>
+    </div>
+
+    <div class="panel dt">
+      <div class="hdrow" id="dtHead"></div>
+      <div class="thread" id="thread"></div>
+      <div class="composer">
+        <div class="drop" id="drop">
+          <b>画像をここにドラッグ＆ドロップ</b>
+          クリックしてファイルを選ぶこともできます（写真・PDF・Word・Excel）
+          <input type="file" id="file" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx" style="display:none">
+        </div>
+        <div class="thumbs" id="pending"></div>
+        <textarea id="msg" placeholder="ご依頼の内容や、修正のご指示をご記入ください。（例）12月の行事予定を差し替えてください。写真は添付のとおりです。"></textarea>
+        <div class="crow">
+          <span class="hint">送信すると担当者に通知が届きます。お急ぎの場合はお電話でもご連絡いただけます。</span>
+          <button class="send" id="btnSend">送信する</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>本画面は開発イメージです（データはサンプル）。実際のダッシュボードは専用URL＋パスワードでご提供し、スマートフォンからもご利用いただけます。</span>
+    <span>© infoNet inc. All Rights Reserved.　CONFIDENTIAL</span>
+  </footer>
+</div>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <div class="mh">新しい更新を依頼する<button id="mClose">×</button></div>
+    <div class="mb">
+      <div class="fld"><label>件名<span class="req">必須</span></label>
+        <input id="fTitle" placeholder="（例）1月の行事予定を掲載してほしい"></div>
+      <div class="fld"><label>ご依頼の内容<span class="req">必須</span></label>
+        <textarea id="fBody" placeholder="どのページの、どの部分を、どのように変更したいかをご記入ください。原稿はこの欄に貼り付けていただいてかまいません。"></textarea></div>
+      <div class="fld"><label>公開のご希望日</label>
+        <input id="fDue" placeholder="（例）2028年1月5日まで／急ぎではありません"></div>
+      <div class="fld"><label>画像・資料の添付</label>
+        <div class="drop" id="drop2"><b>ここにドラッグ＆ドロップ</b>クリックしてファイルを選ぶこともできます
+          <input type="file" id="file2" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx" style="display:none"></div>
+        <div class="thumbs" id="pending2"></div></div>
+      <div class="crow"><span class="hint">受付後、担当者より受付のご連絡をいたします。</span>
+        <button class="send" id="fSend">この内容で依頼する</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const TASKS = [
+  { id:"T-0042", title:"12月の行事予定を掲載してほしい", st:"check", req:"12/08", due:"12/12", pic:"ITLINE 佐藤", min:30,
+    msgs:[
+      { w:"you", nm:"池上長寿園様（経営企画課）", tm:"12/08 10:12",
+        tx:"12月の行事予定を掲載してください。原稿と当日の写真を添付します。掲載先は「お知らせ」でお願いします。",
+        files:[{t:"img",n:"gyoji_2027_12.jpg",src:"images/svc_community.jpg"},{t:"doc",n:"12月行事予定.docx"}] },
+      { w:"us", nm:"ITLINE カスタマーサポート", tm:"12/08 10:40",
+        tx:"承りました。担当を佐藤に割り当てました。12月12日の公開に向けて作業いたします。" },
+      { w:"us", nm:"ITLINE 佐藤（制作）", tm:"12/09 15:05",
+        tx:"掲載が完了しました。下記ページをご確認ください。\nお気づきの点があれば、このままご返信ください。\nwww.ikegami.or.jp/news/event/",
+        files:[{t:"img",n:"掲載後の画面.png",src:"images/svc_flow.jpg"}] }
+    ] },
+  { id:"T-0041", title:"特別養護老人ホーム「大森」の空き情報を更新", st:"doing", req:"12/09", due:"12/11", pic:"ITLINE 田中", min:30,
+    msgs:[
+      { w:"you", nm:"池上長寿園様（大森）", tm:"12/09 09:30",
+        tx:"空き情報を「空きあり（1名）」に変更してください。更新日も本日付でお願いします。" },
+      { w:"us", nm:"インフォネット カスタマーサクセス", tm:"12/09 09:52",
+        tx:"承りました。本日中に反映し、完了後にこちらでご報告いたします。" }
+    ] },
+  { id:"T-0040", title:"求人票を2件追加（介護職・看護職）", st:"wait", req:"12/10", due:"12/15", pic:"（割り当て前）", min:0,
+    msgs:[
+      { w:"you", nm:"池上長寿園様（経営企画課）", tm:"12/10 16:20",
+        tx:"求人票を2件追加してください。募集要項はエクセルにまとめています。写真は既存のものを流用してかまいません。",
+        files:[{t:"doc",n:"募集要項_2028年新卒.xlsx"}] }
+    ] },
+  { id:"T-0039", title:"トップバナーを年末年始の案内に差し替え", st:"done", req:"12/02", due:"12/05", pic:"ITLINE 佐藤", min:30,
+    msgs:[
+      { w:"you", nm:"池上長寿園様（経営企画課）", tm:"12/02 11:05", tx:"年末年始の受付時間の案内に差し替えてください。" },
+      { w:"us", nm:"ITLINE 佐藤（制作）", tm:"12/03 14:10", tx:"差し替えが完了しました。ご確認をお願いいたします。",
+        files:[{t:"img",n:"banner_nenmatsu.png",src:"images/mv_a_warm.png"}] },
+      { w:"you", nm:"池上長寿園様（経営企画課）", tm:"12/03 17:22", tx:"確認しました。ありがとうございます。" }
+    ] },
+  { id:"T-0038", title:"事業報告・計算書類のPDFを差し替え", st:"done", req:"11/27", due:"11/30", pic:"ITLINE 田中", min:30,
+    msgs:[
+      { w:"you", nm:"池上長寿園様（総務）", tm:"11/27 13:40", tx:"情報公開のページのPDFを最新版に差し替えてください。",
+        files:[{t:"doc",n:"事業報告_2027年度.pdf"}] },
+      { w:"us", nm:"ITLINE 田中（制作）", tm:"11/28 10:15", tx:"差し替えが完了しました。旧版は非公開に切り替えています。" }
+    ] },
+  { id:"T-0037", title:"施設のお知らせを3件掲載（蒲田・糀谷・馬込）", st:"done", req:"11/20", due:"11/25", pic:"ITLINE 佐藤", min:60,
+    msgs:[
+      { w:"you", nm:"池上長寿園様（各施設）", tm:"11/20 15:10", tx:"3施設分のお知らせを掲載してください。原稿は施設ごとに分けています。" },
+      { w:"us", nm:"ITLINE 佐藤（制作）", tm:"11/21 16:30", tx:"3件とも掲載しました。施設ごとのお知らせ一覧にも表示されています。" }
+    ] },
+  { id:"T-0036", title:"「ご利用の流れ・料金」ページの文言を修正", st:"done", req:"11/14", due:"11/18", pic:"ITLINE 田中", min:30,
+    msgs:[
+      { w:"you", nm:"池上長寿園様（経営企画課）", tm:"11/14 10:00", tx:"料金表の注記を1行追加してください。文言は本文のとおりです。" },
+      { w:"us", nm:"ITLINE 田中（制作）", tm:"11/14 17:40", tx:"追加しました。スマートフォン表示でも改行位置を確認済みです。" }
+    ] }
+];
+
+const LIMIT = 300;
+const STL = { wait:"受付待ち", doing:"対応中", check:"ご確認待ち", done:"完了" };
+let curId = TASKS[0].id, filter = "all", pend = [], pend2 = [];
+
+function esc(s){ return String(s).split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;"); }
+function fmt(m){
+  if(!m) return "0分";
+  const h = Math.floor(m/60), r = m%60;
+  return (h ? h + "時間" : "") + (r ? r + "分" : (h ? "" : "0分"));
+}
+function sumBy(fn){ return TASKS.filter(fn).reduce(function(a,t){ return a + t.min; }, 0); }
+
+function thumbHtml(f){
+  const body = f.src
+    ? '<img src="' + f.src + '" alt="' + esc(f.n) + '">'
+    : '<div class="fileicon">' + (f.t === "doc" ? "資料" : "画像") + '</div>';
+  return '<figure>' + body + '<figcaption>' + esc(f.n) + '</figcaption></figure>';
+}
+
+function renderCounts(){
+  const c = { wait:0, doing:0, check:0, done:0 };
+  TASKS.forEach(function(t){ c[t.st] += 1; });
+  document.getElementById("nWait").textContent = c.wait;
+  document.getElementById("nDoing").textContent = c.doing;
+  document.getElementById("nCheck").textContent = c.check;
+  document.getElementById("nDone").textContent = c.done;
+  document.getElementById("cdReq").innerHTML = TASKS.length + '<small>件</small>';
+  document.getElementById("taskCnt").textContent = TASKS.length + "件";
+
+  const done = sumBy(function(t){ return t.st === "done"; });
+  const doing = sumBy(function(t){ return t.st === "doing" || t.st === "check"; });
+  const rest = Math.max(0, LIMIT - done - doing);
+  document.getElementById("mUsed").textContent = fmt(done + doing);
+  document.getElementById("mRest").textContent = fmt(rest);
+  document.getElementById("barDone").style.width = (done / LIMIT * 100) + "%";
+  document.getElementById("barDoing").style.width = (doing / LIMIT * 100) + "%";
+  const h = Math.floor(rest/60), r = rest%60;
+  document.getElementById("cdRest").innerHTML = h + '<small>時間</small>' + r + '<small>分</small>';
+  document.querySelector(".meter").classList.toggle("warn", (done + doing) / LIMIT >= 0.8);
+}
+
+function renderList(){
+  const ul = document.getElementById("taskList");
+  const rows = TASKS.filter(function(t){
+    if(filter === "open") return t.st !== "done";
+    if(filter === "done") return t.st === "done";
+    return true;
+  });
+  ul.innerHTML = rows.map(function(t){
+    return '<li data-id="' + t.id + '" class="' + (t.id === curId ? "on" : "") + '">' +
+      '<div class="l1"><span class="st ' + t.st + '">' + STL[t.st] + '</span>' +
+      '<span class="id">' + t.id + '</span></div>' +
+      '<div class="nm">' + esc(t.title) + '</div>' +
+      '<div class="l3"><span>依頼日 ' + t.req + '</span><span>担当 ' + esc(t.pic) + '</span>' +
+      '<span>作業時間 ' + fmt(t.min) + '</span></div></li>';
+  }).join("");
+  Array.prototype.forEach.call(ul.querySelectorAll("li"), function(li){
+    li.addEventListener("click", function(){ curId = li.getAttribute("data-id"); renderList(); renderDetail(false); });
+  });
+}
+
+function renderDetail(toBottom){
+  const t = TASKS.filter(function(x){ return x.id === curId; })[0];
+  if(!t) return;
+  document.getElementById("dtHead").innerHTML =
+    '<div><h3>' + esc(t.title) + '</h3>' +
+    '<div class="meta"><span>' + t.id + '</span>' +
+    '<span>状態 <b>' + STL[t.st] + '</b></span>' +
+    '<span>依頼日 <b>' + t.req + '</b></span>' +
+    '<span>公開希望 <b>' + t.due + '</b></span>' +
+    '<span>担当 <b>' + esc(t.pic) + '</b></span></div></div>' +
+    '<div class="time"><div class="lbl">このご依頼の作業時間</div><div class="num">' + fmt(t.min) + '</div></div>';
+  const th = document.getElementById("thread");
+  th.innerHTML = t.msgs.map(function(m){
+    const files = m.files ? '<div class="thumbs">' + m.files.map(thumbHtml).join("") + '</div>' : "";
+    return '<div class="msg ' + m.w + '"><div class="who">' + (m.w === "you" ? "貴法人" : "弊社") + '</div>' +
+      '<div class="bd"><div class="nmrow"><span class="nm">' + esc(m.nm) + '</span>' +
+      '<span class="tm">' + m.tm + '</span></div>' +
+      '<div class="tx">' + esc(m.tx) + '</div>' + files + '</div></div>';
+  }).join("");
+  th.scrollTop = toBottom ? th.scrollHeight : 0;
+}
+
+function renderPending(box, arr){
+  document.getElementById(box).innerHTML = arr.map(thumbHtml).join("");
+}
+
+function addFiles(list, arr, box){
+  Array.prototype.forEach.call(list, function(f){
+    const isImg = f.type && f.type.indexOf("image/") === 0;
+    const item = { t: isImg ? "img" : "doc", n: f.name, src: isImg ? URL.createObjectURL(f) : null };
+    arr.push(item);
+  });
+  renderPending(box, arr);
+}
+
+function wireDrop(dropId, inputId, arr, box){
+  const d = document.getElementById(dropId), i = document.getElementById(inputId);
+  d.addEventListener("click", function(){ i.click(); });
+  i.addEventListener("change", function(){ addFiles(i.files, arr, box); i.value = ""; });
+  ["dragenter","dragover"].forEach(function(ev){
+    d.addEventListener(ev, function(e){ e.preventDefault(); e.stopPropagation(); d.classList.add("over"); });
+  });
+  ["dragleave","drop"].forEach(function(ev){
+    d.addEventListener(ev, function(e){ e.preventDefault(); e.stopPropagation(); d.classList.remove("over"); });
+  });
+  d.addEventListener("drop", function(e){
+    if(e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files, arr, box);
+  });
+}
+
+function nowStamp(){
+  const d = new Date();
+  const p = function(n){ return (n < 10 ? "0" : "") + n; };
+  return p(d.getMonth() + 1) + "/" + p(d.getDate()) + " " + p(d.getHours()) + ":" + p(d.getMinutes());
+}
+
+document.getElementById("btnSend").addEventListener("click", function(){
+  const ta = document.getElementById("msg");
+  const body = ta.value.trim();
+  if(!body && pend.length === 0){ ta.focus(); return; }
+  const t = TASKS.filter(function(x){ return x.id === curId; })[0];
+  t.msgs.push({ w:"you", nm:"池上長寿園様（経営企画課）", tm:nowStamp(),
+                tx: body || "ファイルを添付しました。", files: pend.slice() });
+  if(t.st === "done"){ t.st = "doing"; }
+  pend = [];
+  ta.value = "";
+  renderPending("pending", pend);
+  renderCounts(); renderList(); renderDetail(true);
+  setTimeout(function(){
+    t.msgs.push({ w:"us", nm:"ITLINE カスタマーサポート", tm:nowStamp(),
+                  tx:"ご連絡ありがとうございます。内容を確認し、担当より改めてご報告いたします。" });
+    if(t.id === curId) renderDetail(true);
+  }, 900);
+});
+
+["btnNew","btnNewTop","btnNewHd"].forEach(function(id){
+  const b = document.getElementById(id);
+  if(b) b.addEventListener("click", function(){
+    document.getElementById("modal").classList.add("on");
+    document.getElementById("fTitle").focus();
+  });
+});
+document.getElementById("mClose").addEventListener("click", function(){
+  document.getElementById("modal").classList.remove("on");
+});
+document.getElementById("modal").addEventListener("click", function(e){
+  if(e.target.id === "modal") document.getElementById("modal").classList.remove("on");
+});
+
+document.getElementById("fSend").addEventListener("click", function(){
+  const ti = document.getElementById("fTitle"), bo = document.getElementById("fBody"),
+        du = document.getElementById("fDue");
+  if(!ti.value.trim()){ ti.focus(); return; }
+  if(!bo.value.trim()){ bo.focus(); return; }
+  const id = "T-00" + (43 + (TASKS.length - 7));
+  const t = {
+    id: id, title: ti.value.trim(), st:"wait", req: nowStamp().split(" ")[0],
+    due: du.value.trim() || "指定なし", pic:"（割り当て前）", min:0,
+    msgs:[{ w:"you", nm:"池上長寿園様（経営企画課）", tm:nowStamp(), tx: bo.value.trim(), files: pend2.slice() }]
+  };
+  TASKS.unshift(t);
+  curId = id; pend2 = [];
+  ti.value = ""; bo.value = ""; du.value = "";
+  renderPending("pending2", pend2);
+  document.getElementById("modal").classList.remove("on");
+  filter = "all";
+  Array.prototype.forEach.call(document.querySelectorAll(".filters button"), function(b){
+    b.classList.toggle("on", b.getAttribute("data-f") === "all");
+  });
+  renderCounts(); renderList(); renderDetail();
+  setTimeout(function(){
+    t.msgs.push({ w:"us", nm:"ITLINE カスタマーサポート", tm:nowStamp(),
+                  tx:"ご依頼を受け付けました。担当を割り当て、内容を確認のうえご連絡いたします。" });
+    t.st = "doing";
+    renderCounts(); renderList();
+    if(t.id === curId) renderDetail();
+  }, 1000);
+});
+
+Array.prototype.forEach.call(document.querySelectorAll(".filters button"), function(b){
+  b.addEventListener("click", function(){
+    filter = b.getAttribute("data-f");
+    Array.prototype.forEach.call(document.querySelectorAll(".filters button"), function(x){
+      x.classList.toggle("on", x === b);
+    });
+    renderList();
+  });
+});
+
+wireDrop("drop", "file", pend, "pending");
+wireDrop("drop2", "file2", pend2, "pending2");
+renderCounts(); renderList(); renderDetail();
+</script>
+</body>
+</html>

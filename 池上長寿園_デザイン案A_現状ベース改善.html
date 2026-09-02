@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社会福祉法人 池上長寿園｜デザイン案A（現状の色味を活かした改善案）</title>
+<style>
+:root{
+  --orange:#f7701b; --orange-dark:#d95c07; --cream:#fff3e6; --cream2:#fffaf4;
+  --ink:#4a3f33; --ink2:#333; --green:#2e8b57; --line:#eadfd2;
+  --fs:16px;
+}
+html{font-size:var(--fs);scroll-behavior:smooth;}
+html.fs-large{--fs:18.5px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Noto Sans JP","Yu Gothic Medium","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;color:#333;background:#fff;line-height:1.85;font-size:1rem;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+.inner{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+/* ===== top bar ===== */
+.topbar{background:var(--cream2);border-bottom:1px solid var(--line);font-size:.78rem;}
+.topbar .inner{display:flex;justify-content:space-between;align-items:center;height:34px;}
+.topbar .tagline{color:#8a7f70;}
+.fs-switch{display:flex;align-items:center;gap:6px;color:#8a7f70;}
+.fs-switch button{border:1px solid var(--line);background:#fff;border-radius:4px;padding:1px 10px;font-size:.78rem;cursor:pointer;color:#666;}
+.fs-switch button.active{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700;}
+
+/* ===== header ===== */
+header.site{position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);z-index:100;box-shadow:0 1px 12px rgba(90,60,20,.08);}
+header.site .inner{display:flex;align-items:center;justify-content:space-between;height:78px;gap:16px;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand img{height:52px;width:auto;}
+nav.g ul{display:flex;list-style:none;gap:4px;}
+nav.g a{display:block;padding:10px 14px;font-size:.92rem;font-weight:600;border-radius:8px;transition:.2s;}
+nav.g a:hover{background:var(--cream);color:var(--orange-dark);}
+.btn-recruit{background:var(--green);color:#fff;font-weight:700;padding:11px 20px;border-radius:999px;font-size:.9rem;box-shadow:0 3px 10px rgba(46,139,87,.3);transition:.2s;white-space:nowrap;}
+.btn-recruit:hover{transform:translateY(-2px);}
+.menu-btn{display:none;}
+
+/* ===== hero ===== */
+.hero{position:relative;overflow:hidden;background:var(--cream2);}
+.hero-bg{position:absolute;inset:0;background:url("images/mv_a_warm.png") center/cover no-repeat;}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(100deg,rgba(255,250,244,.92) 0%,rgba(255,250,244,.78) 34%,rgba(255,250,244,.12) 62%,rgba(255,250,244,0) 100%);}
+.hero .inner{position:relative;min-height:560px;display:flex;flex-direction:column;justify-content:center;padding-top:56px;padding-bottom:150px;}
+.hero .slogan-en{color:var(--orange);font-weight:700;letter-spacing:.3em;font-size:.8rem;margin-bottom:14px;}
+.hero h1{font-size:2.55rem;line-height:1.5;font-weight:700;color:#4a3f33;}
+.hero h1 .em{color:var(--orange);}
+.hero p.lead{margin-top:18px;font-size:1.02rem;color:#6b6152;max-width:34em;}
+.hero-note{margin-top:26px;display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 20px;font-size:.85rem;color:#8a7f70;width:fit-content;box-shadow:0 2px 8px rgba(90,60,20,.06);}
+.hero-note b{color:var(--orange-dark);}
+
+/* gateway */
+.gateway{position:relative;margin-top:-92px;z-index:5;}
+.gateway .inner{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.gw{background:#fff;border-radius:16px;padding:26px 26px 22px;box-shadow:0 8px 28px rgba(120,80,30,.13);border-top:5px solid var(--orange);transition:.25s;}
+.gw:hover{transform:translateY(-4px);}
+.gw.rec{border-top-color:var(--green);}
+.gw .ico{font-size:1.9rem;line-height:1;}
+.gw h2{font-size:1.12rem;margin:10px 0 6px;}
+.gw p{font-size:.85rem;color:#807567;}
+.gw .more{display:inline-block;margin-top:12px;color:var(--orange-dark);font-weight:700;font-size:.85rem;}
+.gw.rec .more{color:var(--green);}
+
+/* ===== section common ===== */
+section{padding:84px 0;}
+.sec-head{margin-bottom:38px;}
+.sec-head .en{color:var(--orange);font-size:.78rem;font-weight:700;letter-spacing:.28em;}
+.sec-head h2{font-size:1.85rem;margin-top:4px;color:#4a3f33;}
+.sec-head p{color:#8a7f70;font-size:.9rem;margin-top:6px;}
+
+/* news */
+.news{background:var(--cream2);}
+.news-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.news-tabs button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 22px;font-size:.88rem;cursor:pointer;color:#6b6152;font-weight:600;}
+.news-tabs button.active{background:var(--orange);border-color:var(--orange);color:#fff;}
+.news-list{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.news-list a{display:flex;gap:20px;align-items:baseline;padding:17px 26px;border-bottom:1px solid var(--line);font-size:.93rem;transition:.15s;flex-wrap:wrap;}
+.news-list a:last-child{border-bottom:none;}
+.news-list a:hover{background:var(--cream);}
+.news-list time{color:#a1937f;font-size:.83rem;white-space:nowrap;font-weight:600;}
+.chip{font-size:.7rem;border-radius:4px;padding:2px 10px;white-space:nowrap;font-weight:700;}
+.chip.c1{background:#ffe3cc;color:var(--orange-dark);}
+.chip.c2{background:#dff0e6;color:#22714a;}
+.chip.c3{background:#e3ecf7;color:#2f6bb0;}
+.news-more{text-align:right;margin-top:14px;}
+.news-more a{color:var(--orange-dark);font-weight:700;font-size:.88rem;}
+
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.svc{background:#fff;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;transition:.2s;position:relative;display:flex;flex-direction:column;}
+.svc:hover{border-color:var(--orange);box-shadow:0 8px 22px rgba(247,112,27,.16);transform:translateY(-3px);}
+.svc .ph{aspect-ratio:600/316;overflow:hidden;background:var(--cream);}
+.svc .ph img{width:100%;height:100%;object-fit:cover;transition:.35s;}
+.svc:hover .ph img{transform:scale(1.05);}
+.svc .tx{padding:16px 18px 18px;flex:1;}
+.svc h3{font-size:1rem;margin-bottom:5px;display:flex;align-items:center;gap:7px;}
+.svc h3::before{content:"";width:4px;height:1em;background:var(--orange);border-radius:2px;flex:none;}
+.svc p{font-size:.8rem;color:#8a7f70;line-height:1.65;}
+
+/* facilities */
+.fac{background:linear-gradient(180deg,#fff 0%,var(--cream) 100%);}
+.fac-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.fac-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(120,80,30,.09);transition:.2s;}
+.fac-card:hover{transform:translateY(-4px);}
+.fac-card .ph{height:120px;background-size:cover;background-position:center;}
+.fac-card .tx{padding:14px 16px 16px;}
+.fac-card h3{font-size:1rem;display:flex;align-items:center;gap:8px;}
+.fac-card h3::before{content:"●";color:var(--orange);font-size:.6rem;}
+.fac-card p{font-size:.78rem;color:#8a7f70;margin-top:3px;}
+.fac-map{margin-top:26px;background:#fff;border:1.5px dashed #e0cdb6;border-radius:14px;padding:18px 24px;font-size:.85rem;color:#a1937f;display:flex;align-items:center;gap:12px;}
+
+/* recruit band */
+.recband{position:relative;overflow:hidden;padding:0;}
+.recband .bg{position:absolute;inset:0;background:url("images/recruit_team.png") center/cover no-repeat;}
+.recband .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,66,44,.86) 0%,rgba(24,66,44,.6) 45%,rgba(24,66,44,.18) 100%);}
+.recband .inner{position:relative;min-height:340px;display:flex;flex-direction:column;justify-content:center;color:#fff;padding-top:56px;padding-bottom:56px;}
+.recband .en{letter-spacing:.3em;font-size:.78rem;font-weight:700;color:#a9e2c3;}
+.recband h2{font-size:1.9rem;margin:8px 0 10px;}
+.recband p{max-width:33em;font-size:.95rem;}
+.recband .btns{display:flex;gap:14px;margin-top:24px;flex-wrap:wrap;}
+.btn-w{background:#fff;color:#22714a;font-weight:700;border-radius:999px;padding:13px 30px;font-size:.95rem;box-shadow:0 4px 14px rgba(0,0,0,.2);transition:.2s;}
+.btn-w:hover{transform:translateY(-2px);}
+.btn-o{border:2px solid #fff;color:#fff;font-weight:700;border-radius:999px;padding:11px 28px;font-size:.95rem;transition:.2s;}
+.btn-o:hover{background:rgba(255,255,255,.15);}
+
+/* contact */
+.contact{background:var(--cream2);}
+.contact-box{background:#fff;border-radius:18px;box-shadow:0 8px 28px rgba(120,80,30,.1);padding:46px 40px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;}
+.contact-box .tel .num{font-size:2rem;font-weight:700;color:#4a3f33;letter-spacing:.03em;}
+.contact-box .tel .num::before{content:"📞 ";font-size:1.3rem;}
+.contact-box .tel p{font-size:.83rem;color:#8a7f70;}
+.btn-main{display:inline-block;background:var(--orange);color:#fff;font-weight:700;border-radius:999px;padding:16px 44px;font-size:1.05rem;box-shadow:0 6px 18px rgba(247,112,27,.35);transition:.2s;text-align:center;}
+.btn-main:hover{transform:translateY(-2px);background:var(--orange-dark);}
+
+/* footer */
+footer.site{background:#4a3f33;color:#e8e0d4;font-size:.85rem;}
+footer.site .inner{padding:56px 24px 30px;}
+.f-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:30px;}
+.f-grid img{height:44px;width:auto;background:#fff;padding:6px 10px;border-radius:8px;}
+.f-grid .addr{margin-top:14px;font-size:.8rem;line-height:1.8;color:#cfc4b4;}
+.f-grid h4{font-size:.85rem;color:#f0b483;margin-bottom:10px;}
+.f-grid ul{list-style:none;}
+.f-grid li{margin:6px 0;}
+.f-grid a:hover{color:#fff;text-decoration:underline;}
+.f-bottom{border-top:1px solid #6b5e4d;margin-top:40px;padding-top:18px;display:flex;justify-content:space-between;font-size:.75rem;color:#a99a85;flex-wrap:wrap;gap:8px;}
+
+/* ===== responsive ===== */
+@media(max-width:900px){
+  .topbar .tagline{display:none;}
+  nav.g{display:none;}
+  .menu-btn{display:flex;flex-direction:column;gap:5px;background:var(--orange);border:none;border-radius:10px;width:48px;height:48px;align-items:center;justify-content:center;cursor:pointer;}
+  .menu-btn span{display:block;width:20px;height:2.5px;background:#fff;border-radius:2px;}
+  .hero .inner{min-height:480px;padding-bottom:170px;}
+  .hero h1{font-size:1.75rem;}
+  .hero-bg{background-position:68% center;}
+  .hero-veil{background:linear-gradient(180deg,rgba(255,250,244,.94) 0%,rgba(255,250,244,.75) 55%,rgba(255,250,244,.2) 100%);}
+  .gateway .inner{grid-template-columns:1fr;gap:12px;}
+  .gateway{margin-top:-120px;}
+  section{padding:56px 0;}
+  .svc-grid{grid-template-columns:repeat(2,1fr);}
+  .fac-grid{grid-template-columns:repeat(2,1fr);}
+  .contact-box{grid-template-columns:1fr;text-align:center;padding:34px 22px;}
+  .contact-box .tel .num{font-size:1.6rem;}
+  .f-grid{grid-template-columns:1fr;gap:22px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="inner">
+    <span class="tagline">未来への創造 〜歴史を紡ぎ、"今"に挑戦する〜</span>
+    <div class="fs-switch">文字サイズ
+      <button id="fsStd" class="active" onclick="setFs(false)">標準</button>
+      <button id="fsLg" onclick="setFs(true)">大きく</button>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="inner">
+    <a class="brand" href="#"><img src="images/logo.gif" alt="社会福祉法人 池上長寿園"></a>
+    <nav class="g">
+      <ul>
+        <li><a href="#svc">介護サービスのご案内</a></li>
+        <li><a href="#fac">施設のご案内</a></li>
+        <li><a href="#news">お知らせ</a></li>
+        <li><a href="#">法人について</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+    <a class="btn-recruit" href="#rec">採用サイト ▶</a>
+    <button class="menu-btn" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-veil"></div>
+  <div class="inner">
+    <div class="slogan-en">IKEGAMI CHOJUEN</div>
+    <h1>笑顔がつなぐ、<br>大田区の<span class="em">安心</span>と<span class="em">長寿</span>。</h1>
+    <p class="lead">社会福祉法人 池上長寿園は、大田区で7つの施設を運営し、特別養護老人ホーム・ショートステイ・デイサービスなど、地域に根ざした介護サービスをお届けしています。</p>
+    <div class="hero-note"><b>未来への創造</b>〜 歴史を紡ぎ、"今"に挑戦する 〜</div>
+  </div>
+</div>
+
+<div class="gateway">
+  <div class="inner">
+    <a class="gw" href="#svc">
+      <div class="ico">🏠</div>
+      <h2>はじめてご利用を検討される方へ</h2>
+      <p>介護サービスの種類、ご利用の流れ・料金をわかりやすくご案内します。</p>
+      <span class="more">サービスを探す →</span>
+    </a>
+    <a class="gw" href="#fac">
+      <div class="ico">📍</div>
+      <h2>お近くの施設をお探しの方へ</h2>
+      <p>大森・池上・蒲田・糀谷・羽田・たまがわ・馬込。地域から施設を探せます。</p>
+      <span class="more">施設一覧を見る →</span>
+    </a>
+    <a class="gw rec" href="#rec">
+      <div class="ico">🤝</div>
+      <h2>採用・求人をお探しの方へ</h2>
+      <p>介護職員・看護職員・ソーシャルワーカーなど、職種・勤務地から検索できます。</p>
+      <span class="more">求人情報を検索 →</span>
+    </a>
+  </div>
+</div>
+
+<section class="news" id="news">
+  <div class="inner">
+    <div class="sec-head">
+      <div class="en">NEWS</div>
+      <h2>お知らせ</h2>
+    </div>
+    <div class="news-tabs">
+      <button class="active">すべて</button>
+      <button>法人から</button>
+      <button>各施設から</button>
+      <button>人財・採用</button>
+    </div>
+    <div class="news-list">
+      <a href="#"><time>2026.08.01</time><span class="chip c1">法人から</span>SECURITY ACTION「一つ星」を宣言しました</a>
+      <a href="#"><time>2026.07.21</time><span class="chip c1">法人から</span>広報誌「いけがみ」第128号を発行しました</a>
+      <a href="#"><time>2026.07.15</time><span class="chip c2">各施設から</span>デイサービス・ショートステイの空き情報を更新しました</a>
+      <a href="#"><time>2026.07.10</time><span class="chip c3">人財・採用</span>介護職員（正職員）の募集を開始しました</a>
+      <a href="#"><time>2026.07.02</time><span class="chip c2">各施設から</span>夏祭りイベントの開催報告を掲載しました</a>
+    </div>
+    <div class="news-more"><a href="#">お知らせ一覧を見る →</a></div>
+  </div>
+</section>
+
+<section id="svc">
+  <div class="inner">
+    <div class="sec-head">
+      <div class="en">SERVICE</div>
+      <h2>介護サービスのご案内</h2>
+      <p>目的にあわせて、必要なサービスをお選びいただけます。</p>
+    </div>
+    <div class="svc-grid">
+      <a class="svc" href="#"><div class="ph"><img src="images/svc_tokuyo.jpg" alt="特別養護老人ホーム" loading="lazy"></div><div class="tx"><h3>特別養護老人ホーム</h3><p>常時介護が必要な方への入所サービス</p></div></a>
+      <a class="svc" href="#"><div class="ph"><img src="images/svc_short.jpg" alt="ショートステイ" loading="lazy"></div><div class="tx"><h3>ショートステイ</h3><p>短期間のお泊まりで介護をサポート</p></div></a>
+      <a class="svc" href="#"><div class="ph"><img src="images/svc_day.jpg" alt="デイサービス" loading="lazy"></div><div class="tx"><h3>デイサービス</h3><p>日帰りで機能訓練や入浴・お食事を</p></div></a>
+      <a class="svc" href="#"><div class="ph"><img src="images/svc_kyotaku.jpg" alt="居宅介護支援" loading="lazy"></div><div class="tx"><h3>居宅介護支援</h3><p>ケアマネジャーがケアプランを作成</p></div></a>
+      <a class="svc" href="#"><div class="ph"><img src="images/svc_houkatsu.jpg" alt="地域包括支援センター" loading="lazy"></div><div class="tx"><h3>地域包括支援センター</h3><p>高齢者の暮らしの総合相談窓口</p></div></a>
+      <a class="svc" href="#"><div class="ph"><img src="images/svc_community.jpg" alt="さわやかサポート" loading="lazy"></div><div class="tx"><h3>さわやかサポート</h3><p>地域交流・介護予防の取り組み</p></div></a>
+      <a class="svc" href="#"><div class="ph"><img src="images/svc_flow.jpg" alt="ご利用の流れ・料金" loading="lazy"></div><div class="tx"><h3>ご利用の流れ・料金</h3><p>はじめての方にもわかりやすく解説</p></div></a>
+      <a class="svc" href="#"><div class="ph"><img src="images/svc_vacancy.jpg" alt="空き情報" loading="lazy"></div><div class="tx"><h3>空き情報</h3><p>各施設の最新の空き状況はこちら</p></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="fac" id="fac">
+  <div class="inner">
+    <div class="sec-head">
+      <div class="en">FACILITY</div>
+      <h2>施設のご案内</h2>
+      <p>大田区内7施設。お住まいの地域からお選びください。</p>
+    </div>
+    <div class="fac-grid">
+      <a class="fac-card" href="#"><div class="ph" style="background-image:url('images/fac_omori.jpg')"></div><div class="tx"><h3>大森</h3><p>特養・ショート・デイ</p></div></a>
+      <a class="fac-card" href="#"><div class="ph" style="background-image:url('images/fac_ikegami.jpg')"></div><div class="tx"><h3>池上</h3><p>特養・ショート・デイ</p></div></a>
+      <a class="fac-card" href="#"><div class="ph" style="background-image:url('images/fac_kamata.jpg')"></div><div class="tx"><h3>蒲田</h3><p>特養・ショート・デイ</p></div></a>
+      <a class="fac-card" href="#"><div class="ph" style="background-image:url('images/fac_koujiya.jpg')"></div><div class="tx"><h3>糀谷</h3><p>特養・ショート・デイ</p></div></a>
+      <a class="fac-card" href="#"><div class="ph" style="background-image:url('images/fac_haneda.jpg')"></div><div class="tx"><h3>羽田</h3><p>特養・ショート・デイ</p></div></a>
+      <a class="fac-card" href="#"><div class="ph" style="background-image:url('images/fac_tamagawa.jpg')"></div><div class="tx"><h3>たまがわ</h3><p>特養・ショート・デイ</p></div></a>
+      <a class="fac-card" href="#"><div class="ph" style="background-image:url('images/fac_magome.jpg')"></div><div class="tx"><h3>馬込</h3><p>高齢者在宅サービス</p></div></a>
+      <a class="fac-card" href="#"><div class="ph" style="background-image:url('images/map_otaku.jpg')"></div><div class="tx"><h3>施設一覧マップ</h3><p>地図から探す</p></div></a>
+    </div>
+    <div class="fac-map">💡 各施設ページでは「施設紹介／空き情報／行事・イベント／お知らせ／交通アクセス」を共通の構成でご覧いただけます。</div>
+  </div>
+</section>
+
+<section class="recband" id="rec">
+  <div class="bg"></div>
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="en">RECRUIT</div>
+    <h2>いっしょに、笑顔をつくる仕事。</h2>
+    <p>池上長寿園では、介護職員・看護職員・ソーシャルワーカー・ケアパートナーなど、さまざまな職種の仲間を募集しています。職種・勤務地・雇用形態から、あなたに合う求人を検索できます。</p>
+    <div class="btns">
+      <a class="btn-w" href="#">求人情報を検索する 🔍</a>
+      <a class="btn-o" href="#">採用サイトを見る</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="inner">
+    <div class="sec-head">
+      <div class="en">CONTACT</div>
+      <h2>ご相談・お問い合わせ</h2>
+    </div>
+    <div class="contact-box">
+      <div class="tel">
+        <div class="num">03-5700-6171</div>
+        <p>受付時間 9:00〜17:00（月〜金）／ご利用相談・見学のお申し込みもお気軽に</p>
+      </div>
+      <div style="text-align:center;">
+        <a class="btn-main" href="#">メールでお問い合わせ ✉</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="inner">
+    <div class="f-grid">
+      <div>
+        <img src="images/logo.gif" alt="社会福祉法人 池上長寿園">
+        <p class="addr">社会福祉法人 池上長寿園<br>〒146-0081 東京都大田区仲池上2-24-8<br>TEL 03-5700-6171（代）</p>
+      </div>
+      <div>
+        <h4>介護サービス</h4>
+        <ul><li><a href="#">特別養護老人ホーム</a></li><li><a href="#">ショートステイ</a></li><li><a href="#">デイサービス</a></li><li><a href="#">居宅介護支援</a></li><li><a href="#">地域包括支援センター</a></li></ul>
+      </div>
+      <div>
+        <h4>施設のご案内</h4>
+        <ul><li><a href="#">大森／池上／蒲田</a></li><li><a href="#">糀谷／羽田</a></li><li><a href="#">たまがわ／馬込</a></li><li><a href="#">空き情報</a></li></ul>
+      </div>
+      <div>
+        <h4>法人について</h4>
+        <ul><li><a href="#">理事長ごあいさつ・理念</a></li><li><a href="#">法人概要・沿革</a></li><li><a href="#">情報公開（事業報告・計算書類）</a></li><li><a href="#">採用情報</a></li><li><a href="#">お問い合わせ</a></li></ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>推奨環境｜個人情報保護方針｜サイトマップ</span>
+      <span>© Ikegami Chojuen. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function setFs(large){
+  document.documentElement.classList.toggle('fs-large', large);
+  document.getElementById('fsStd').classList.toggle('active', !large);
+  document.getElementById('fsLg').classList.toggle('active', large);
+}
+</script>
+</body>
+</html>
