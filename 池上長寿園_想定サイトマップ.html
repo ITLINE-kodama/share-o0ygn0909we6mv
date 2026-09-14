@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社会福祉法人池上長寿園様 リニューアル後 想定サイトマップ（案）</title>
+<style>
+  :root{
+    --ink:#2b2b2b; --accent:#f7701b; --accent-dark:#c65505; --green:#2e7d54;
+    --line:#d9d2c8; --bg:#faf7f2; --card:#ffffff; --new:#e0534f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Noto Sans JP","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;}
+  .container{max-width:1180px;margin:0 auto;padding:40px 24px 80px;}
+  header.doc{border-bottom:3px solid var(--accent);padding-bottom:20px;margin-bottom:28px;}
+  .doc .en{color:var(--accent);font-size:12px;letter-spacing:.25em;font-weight:700;}
+  .doc h1{font-size:26px;margin-top:6px;}
+  .doc .meta{color:#777;font-size:12.5px;margin-top:8px;}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;font-size:12.5px;margin-bottom:30px;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;border-radius:4px;padding:1px 7px;line-height:1.6;}
+  .tag.new{background:var(--new);color:#fff;}
+  .tag.keep{background:#e8e2d8;color:#6b6152;}
+  .tag.db{background:#2f6bb0;color:#fff;}
+  .tag.merge{background:var(--green);color:#fff;}
+  h2.sec{font-size:19px;margin:44px 0 6px;padding-left:12px;border-left:5px solid var(--accent);}
+  .sec-note{font-size:12.5px;color:#777;margin-bottom:16px;}
+  .tree{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px 28px;overflow-x:auto;}
+  ul.map, ul.map ul{list-style:none;}
+  ul.map ul{margin-left:26px;padding-left:18px;border-left:2px dotted #cbbfae;}
+  ul.map li{margin:7px 0;position:relative;}
+  ul.map ul li::before{content:"";position:absolute;left:-18px;top:13px;width:12px;height:2px;background:#cbbfae;}
+  .node{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:7px;padding:5px 12px;font-size:13.5px;}
+  .node b{font-weight:600;}
+  .node .slug{color:#999;font-size:11px;font-family:Consolas,monospace;}
+  .node .role{color:#8a7f70;font-size:11px;}
+  .node.top{background:var(--accent);border-color:var(--accent);color:#fff;font-size:15px;padding:8px 18px;}
+  .node.top .slug,.node.top .role{color:#ffe3cc;}
+  .node.cat{background:#fff4ea;border-color:#f0b483;}
+  .node.recruit{background:#eef6f0;border-color:#9cc7ad;}
+  .group-label{font-size:11.5px;font-weight:700;color:#a1937f;letter-spacing:.15em;margin:18px 0 4px;}
+  table.list{width:100%;border-collapse:collapse;background:var(--card);font-size:12.5px;margin-top:14px;}
+  table.list th,table.list td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top;}
+  table.list th{background:#f3ede3;font-weight:600;white-space:nowrap;}
+  table.list td.num{text-align:right;white-space:nowrap;}
+  .note-box{background:#fff8ef;border:1px solid #f0cfa8;border-radius:10px;padding:16px 20px;font-size:13px;margin-top:26px;}
+  .note-box h3{font-size:14px;color:var(--accent-dark);margin-bottom:6px;}
+  .wrap-scroll{overflow-x:auto;}
+  footer.doc{margin-top:60px;padding-top:16px;border-top:1px solid var(--line);color:#999;font-size:11.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="doc">
+  <div class="en">PROPOSED SITEMAP</div>
+  <h1>社会福祉法人 池上長寿園様　リニューアル後 想定サイトマップ（案）</h1>
+  <div class="meta">2026年8月5日（2026年8月19日 改訂：設計理由・新規ページの説明を追記／2026年8月20日 PDF版発行）｜株式会社インフォネット（制作パートナー：株式会社ITLINE）｜現行サイト www.ikegami.or.jp（制作対象156ページ）</div>
+</header>
+
+<div class="legend">
+  <span><span class="tag new">★新規</span> 新規作成ページ</span>
+  <span><span class="tag keep">既存</span> 現行コンテンツを流用・再構成</span>
+  <span><span class="tag merge">統合</span> 現行の複数ページを統合</span>
+  <span><span class="tag db">DB</span> 求人検索データベース（現行機能・登録データを引き継ぎ）</span>
+  <span>表記＝ページ名／<span style="font-family:Consolas,monospace;color:#999;">URLスラッグ案</span>／役割</span>
+</div>
+
+<div class="note-box" style="margin-bottom:6px;">
+  <h3>この構成にした理由（設計方針）</h3>
+  <b>① 主要な情報へ「3クリック以内」で到達できる階層にしています。</b><br>
+  　Webサイトは、クリックの回数が増えるほど途中で離脱する人が増えることが分かっています。特に本サイトの中心利用者である60〜70代のご利用者・ご家族は、深い階層をたどる操作が負担になりやすいため、「トップ → 分類 → 目的のページ」の3クリックで必ず着ける深さに全ページを収めました。<br><br>
+  <b>② 入口を「目的から探す」「場所から探す」「採用」の3つに絞っています。</b><br>
+  　本サイトに来る方は「サービスを検討しているご家族・ケアマネジャー」「特定の施設を調べたい方」「働きたい求職者」の3種類にほぼ分かれます。トップページでこの3つの入口を大きく示すことで、どの立場の方も迷わず自分のページにたどり着けます。<br><br>
+  <b>③ 採用サイトを独立したまとまりにしています。</b><br>
+  　今回のリニューアルの最優先目的は採用強化です。求職者に「見せたい情報」と、ご利用者向けの情報は性質が異なるため、採用は独立ブロックとして分け、経営企画課の皆さまが承認フロー付きで自由に更新できる設計としました（RFP要件にも対応）。
+</div>
+
+<h2 class="sec">コーポレートサイト 全体構成</h2>
+<p class="sec-note">主要情報にはトップから3クリック以内で到達できる階層に整理。グローバルナビは「目的から探す（サービス）」「場所から探す（施設）」「採用」の3導線を軸に、60〜70代の利用者・ご家族にも分かる名称とします。</p>
+
+<div class="tree">
+<ul class="map">
+<li><span class="node top"><b>トップページ</b><span class="slug">/</span><span class="role">3ターゲット別ゲートウェイ・お知らせ統合表示</span></span>
+
+  <ul>
+  <li><span class="node cat"><b>介護サービスのご案内</b><span class="slug">/service/</span><span class="role">目的から探す</span><span class="tag merge">統合</span></span>
+    <ul>
+      <li><span class="node"><b>特別養護老人ホーム</b><span class="slug">/service/tokuyo/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>ショートステイ</b><span class="slug">/service/shortstay/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>デイサービス</b><span class="slug">/service/dayservice/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>ケアマネジャー（居宅介護支援）</b><span class="slug">/service/kyotaku/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>地域包括支援センター</b><span class="slug">/service/houkatsu/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>さわやかサポート・地域交流</b><span class="slug">/service/community/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>ご利用の流れ・料金</b><span class="slug">/service/flow/</span><span class="role">初めての方向けに手続きと料金を平易に解説</span><span class="tag new">★新規</span></span></li>
+    </ul>
+  </li>
+
+  <li><span class="node cat"><b>施設のご案内</b><span class="slug">/facility/</span><span class="role">場所から探す・7施設共通テンプレート</span><span class="tag merge">統合</span></span>
+    <ul>
+      <li><span class="node"><b>大森</b><span class="slug">/facility/omori/</span><span class="tag keep">既存</span></span>
+        <ul>
+          <li><span class="node"><b>施設紹介・フロア案内</b><span class="slug">…/about/</span><span class="tag keep">既存</span></span></li>
+          <li><span class="node"><b>提供サービス・空き情報</b><span class="slug">…/vacancy/</span><span class="tag keep">既存</span></span></li>
+          <li><span class="node"><b>行事・イベント</b><span class="slug">…/event/</span><span class="role">PDF添付からWeb記事化</span><span class="tag keep">既存</span></span></li>
+          <li><span class="node"><b>施設からのお知らせ</b><span class="slug">…/news/</span><span class="tag keep">既存</span></span></li>
+          <li><span class="node"><b>交通アクセス</b><span class="slug">…/access/</span><span class="tag keep">既存</span></span></li>
+        </ul>
+      </li>
+      <li><span class="node"><b>池上</b><span class="slug">/facility/ikegami/</span><span class="role">下層構成は大森と共通</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>蒲田</b><span class="slug">/facility/kamata/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>糀谷</b><span class="slug">/facility/koujiya/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>羽田</b><span class="slug">/facility/haneda/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>たまがわ</b><span class="slug">/facility/tamagawa/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>馬込</b><span class="slug">/facility/magome/</span><span class="tag keep">既存</span></span></li>
+    </ul>
+  </li>
+
+  <li><span class="node cat"><b>お知らせ</b><span class="slug">/news/</span><span class="role">法人・各施設・採用の3系統をタブで統合</span><span class="tag merge">統合</span></span>
+    <ul>
+      <li><span class="node"><b>法人からのお知らせ</b><span class="slug">/news/corp/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>各施設からのお知らせ</b><span class="slug">/news/facility/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>行事・イベントレポート</b><span class="slug">/news/event/</span><span class="tag keep">既存</span></span></li>
+    </ul>
+  </li>
+
+  <li><span class="node cat"><b>法人について</b><span class="slug">/about/</span><span class="tag merge">統合</span></span>
+    <ul>
+      <li><span class="node"><b>理事長ごあいさつ・理念</b><span class="slug">/about/message/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>法人概要・沿革</b><span class="slug">/about/outline/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>情報公開（事業報告・計算書類）</b><span class="slug">/about/disclosure/</span><span class="role">社会福祉法人の公開義務コンテンツ</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>広報誌</b><span class="slug">/about/kouhou/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>運営推進会議 議事録</b><span class="slug">/about/minutes/</span><span class="tag keep">既存</span></span></li>
+      <li><span class="node"><b>取組・地域貢献</b><span class="slug">/about/activity/</span><span class="role">「選ばれる法人」の可視化</span><span class="tag new">★新規</span></span></li>
+    </ul>
+  </li>
+
+  <li><span class="node cat"><b>お問い合わせ</b><span class="slug">/contact/</span><span class="role">用途別フォーム（利用相談・見学・その他）</span><span class="tag new">★新規</span></span>
+    <ul>
+      <li><span class="node"><b>ご利用相談・見学申込</b><span class="slug">/contact/consult/</span><span class="role">電話が苦手な世代・時間帯でも相談できる窓口</span><span class="tag new">★新規</span></span></li>
+      <li><span class="node"><b>ボランティア募集・応募</b><span class="slug">/contact/volunteer/</span><span class="tag keep">既存</span></span></li>
+    </ul>
+  </li>
+  </ul>
+</li>
+</ul>
+
+<div class="group-label">共通要素（全ページ）</div>
+<ul class="map">
+  <li><span class="node"><b>ヘッダー</b><span class="role">ロゴ／グローバルナビ／文字サイズ変更（標準・大）／サイト内検索／採用サイトへの導線ボタン</span></span></li>
+  <li><span class="node"><b>フッター</b><span class="role">サイトマップ全展開型／各施設連絡先／プライバシーポリシー／推奨環境</span></span></li>
+  <li><span class="node"><b>パンくずリスト</b><span class="role">現在位置を常に表示（RFP要件）</span></span></li>
+</ul>
+</div>
+
+<h2 class="sec">採用サイト（独立編集ブロック）</h2>
+<p class="sec-note">RFP要件「採用ページの充実化。別ページとして独立して全体編集ができること」に対応。経営企画課が承認フロー付きで独立運用できるブロックとして設計します。</p>
+
+<div class="tree">
+<ul class="map">
+<li><span class="node top" style="background:var(--green);border-color:var(--green);"><b>採用サイトTOP</b><span class="slug">/recruit/</span><span class="role">求職者専用ゲートウェイ</span></span>
+  <ul>
+    <li><span class="node recruit"><b>求人検索</b><span class="slug">/recruit/search/</span><span class="role">職種・勤務地・雇用形態で絞り込み</span><span class="tag db">DB</span><span class="tag keep">既存</span></span>
+      <ul>
+        <li><span class="node recruit"><b>求人詳細（データ登録）</b><span class="slug">/recruit/search/{id}/</span><span class="role">現行登録データを全件移行</span><span class="tag db">DB</span></span></li>
+      </ul>
+    </li>
+    <li><span class="node recruit"><b>職種紹介（介護・看護・相談員・事務 等）</b><span class="slug">/recruit/job/</span><span class="role">中途・新卒それぞれへの訴求を明確化</span><span class="tag new">★新規</span></span></li>
+    <li><span class="node recruit"><b>先輩職員の声・1日の流れ</b><span class="slug">/recruit/voice/</span><span class="role">「どんな人と働くか」を伝え応募の不安を解消</span><span class="tag new">★新規</span></span></li>
+    <li><span class="node recruit"><b>教育・研修、資格取得支援</b><span class="slug">/recruit/training/</span><span class="role">未経験者・若手の「育ててもらえるか」に応える</span><span class="tag new">★新規</span></span></li>
+    <li><span class="node recruit"><b>福利厚生・数字で見る池上長寿園</b><span class="slug">/recruit/data/</span><span class="role">待遇・働きやすさを数字で示し他法人と差別化</span><span class="tag new">★新規</span></span></li>
+    <li><span class="node recruit"><b>採用に関するお知らせ</b><span class="slug">/recruit/news/</span><span class="tag keep">既存</span></span></li>
+    <li><span class="node recruit"><b>エントリー・応募フォーム</b><span class="slug">/recruit/entry/</span><span class="role">応募ハードルを下げるカジュアル相談も受付</span><span class="tag new">★新規</span></span></li>
+  </ul>
+</li>
+</ul>
+</div>
+
+<h2 class="sec">★新規ページを追加する理由（9ページ）</h2>
+<p class="sec-note">現行サイトにないページを★新規として9ページご提案しています。それぞれ「なぜ必要か」「何が良くなるか」は以下のとおりです。</p>
+<div class="wrap-scroll">
+<table class="list">
+  <tr><th>新規ページ</th><th>なぜ必要か（現状の課題）</th><th>期待できること</th></tr>
+  <tr><td><b>ご利用の流れ・料金</b><br><span style="color:#999;font-size:11px;">/service/flow/</span></td><td>初めての方が「何から始めればよいか」「いくらかかるか」を調べられるページが現行サイトにない。介護サービスの検討者が最初に知りたい情報。</td><td>ご利用相談・見学申込の増加（KPI：問い合わせ件数）。電話での基本的な質問の削減。</td></tr>
+  <tr><td><b>取組・地域貢献</b><br><span style="color:#999;font-size:11px;">/about/activity/</span></td><td>地域交流・行事などの活動が現行では発信しきれておらず、法人の魅力が伝わっていない。</td><td>「選ばれる法人」としての信頼感の醸成。求職者・ご家族双方への好印象。</td></tr>
+  <tr><td><b>用途別お問い合わせ</b><br><span style="color:#999;font-size:11px;">/contact/</span></td><td>現行は問い合わせ窓口がひとつで、利用相談・見学・その他が混在し、回答までに取次が発生している。</td><td>用件が最初から仕分けされ、担当部署が迅速に回答できる。相談のハードルも下がる。</td></tr>
+  <tr><td><b>ご利用相談・見学申込フォーム</b><br><span style="color:#999;font-size:11px;">/contact/consult/</span></td><td>見学・相談の申込みは現在ほぼ電話のみ。日中に電話できないご家族（働き世代）を取りこぼしている。</td><td>24時間受付できる相談窓口。問い合わせ件数の増加（KPI）。</td></tr>
+  <tr><td><b>職種紹介</b><br><span style="color:#999;font-size:11px;">/recruit/job/</span></td><td>現行の採用情報は求人票のみで、介護・看護・相談員・事務など仕事内容の違いが伝わらない。中途・新卒それぞれへの訴求が乏しい（現状分析より）。</td><td>仕事のイメージが湧き、応募の質・量が向上。ミスマッチによる早期離職の抑制。</td></tr>
+  <tr><td><b>先輩職員の声・1日の流れ</b><br><span style="color:#999;font-size:11px;">/recruit/voice/</span></td><td>求職者が最も知りたい「どんな人と、どんな1日を過ごすのか」の情報が現行にない。</td><td>職場の雰囲気が伝わり応募の心理的ハードルが低下。採用エントリー増（KPI）。</td></tr>
+  <tr><td><b>教育・研修、資格取得支援</b><br><span style="color:#999;font-size:11px;">/recruit/training/</span></td><td>未経験者・若手が不安に感じる「育成体制」の情報が現行にない。介護業界の採用では応募判断の決め手になりやすい項目。</td><td>未経験層・若年層への応募間口の拡大。</td></tr>
+  <tr><td><b>福利厚生・数字で見る池上長寿園</b><br><span style="color:#999;font-size:11px;">/recruit/data/</span></td><td>待遇・休暇・職員構成などを比較検討する材料が現行になく、他法人との比較で不利。</td><td>待遇・働きやすさの見える化による他法人との差別化。</td></tr>
+  <tr><td><b>エントリー・応募フォーム</b><br><span style="color:#999;font-size:11px;">/recruit/entry/</span></td><td>現行の応募導線は求人票からのみ。「まず話を聞いてみたい」段階の求職者の受け皿がない。</td><td>カジュアル相談を含む応募窓口の一本化。エントリー数の増加（KPI）。</td></tr>
+</table>
+</div>
+<p class="sec-note" style="margin-top:10px;">※ 9ページはいずれも、RFPのKPI（問い合わせ件数の増加・採用エントリー数の増加）に直接つながるページとして選定しています。逆に、KPIに寄与しない「あったら良い」ページは追加していません。</p>
+
+<h2 class="sec">ページ一覧表（規模サマリー）</h2>
+<div class="wrap-scroll">
+<table class="list">
+  <tr><th>区分</th><th>内容</th><th class="num">規模</th><th>新規/既存</th><th>御見積書の対応項目</th></tr>
+  <tr><td>トップページ</td><td>グローバルデザイン</td><td class="num">1P</td><td>リニューアル</td><td>PCSP_TOPグローバルデザイン/コーディング</td></tr>
+  <tr><td>独自レイアウト固定ページ<br>（コーポレート）</td><td>イベント・トピックス施設一覧／地域包括支援センター田園調布</td><td class="num">2P</td><td>リニューアル</td><td>ページ デザイン/コーディング（独自レイアウト固定ページ）</td></tr>
+  <tr><td>下層コンテンツページ<br>（コーポレート）</td><td>サービス紹介・7施設別ページ・法人情報 ほか</td><td class="num">142P</td><td>既存流用＋★新規</td><td>コンテンツ制作（施設別ページ等・通常単価）</td></tr>
+  <tr><td><b>採用サイト</b>｜独自レイアウト</td><td>採用TOP／求人検索・一覧／求人詳細</td><td class="num">4P</td><td>リニューアル</td><td rowspan="3" style="background:#eef6f0"><b>採用サイト制作費</b>として分離計上</td></tr>
+  <tr><td><b>採用サイト</b>｜施設別ページ</td><td>職員募集・ボランティア募集（大森・蒲田・糀谷 ほか）</td><td class="num">7P</td><td>既存流用</td></tr>
+  <tr><td><b>採用サイト</b>｜求人検索DB</td><td>検索機能＋登録求人データ（機能・データとも引き継ぎ）</td><td class="num">一式</td><td>機能引き継ぎ</td></tr>
+  <tr><td>データ登録（コーポレート）</td><td>法人・各施設のお知らせ、行事・イベント記事 ほか</td><td class="num">221件</td><td>全件移行</td><td>データ登録（既存記事の移行／221件）</td></tr>
+  <tr><td>データ登録（採用）</td><td>求人票・採用に関するお知らせ</td><td class="num">65件</td><td>全件移行</td><td>データ登録（求人票・採用お知らせ／65件）</td></tr>
+  <tr><td colspan="2"><b>制作対象 合計</b></td><td class="num"><b>156P ＋ 286件</b></td><td colspan="2">制作156P＝貴法人ご提供ページ一覧（2026年8月）／データ登録286件＝2026年7月サイトマップ精査</td></tr>
+</table>
+</div>
+
+<div class="note-box">
+  <h3>設計上の注記</h3>
+  ・貴法人ご提供のページ一覧（2026年8月）に基づく<b>制作対象156ページ＋データ登録286件</b>を上表のとおり再編成します。<br>
+  ・本図で<b>★＝新規</b>としているページ（ご利用の流れ・料金、取組・地域貢献、用途別お問い合わせ、職種紹介、先輩職員の声、教育・研修、福利厚生、エントリーフォーム等 計9ページ）は、既存156Pには含まれないため、御見積書の<b>「予備費（ページ追加及び機能追加）」</b>にて対応いたします。<br>
+  ・「空き情報」「料金」「運営推進会議議事録」など更新頻度の高い情報はCMSの定型入力で<b>1記事20分以内</b>に更新できる設計とします。<br>
+  ・全ページ共通でパンくず・現在位置表示を実装し、主要情報へ<b>3クリック以内</b>で到達する階層に収めています。<br>
+  ・配色変更機能はご要件により非搭載とし、文字サイズ変更（標準・大）とコントラストを確保した配色設計で代替します。
+</div>
+
+<footer class="doc">
+  <span>社会福祉法人 池上長寿園様　WEBサイトリニューアル 想定サイトマップ（案）</span>
+  <span>© infoNet inc. All Rights Reserved.　CONFIDENTIAL</span>
+</footer>
+</div>
+</body>
+</html>

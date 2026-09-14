@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社会福祉法人 池上長寿園様｜WEBサイトリニューアル ご提案一覧</title>
+<style>
+  :root{
+    --navy:#004299; --navy-d:#0b224e; --ink:#222; --gray:#6b7280;
+    --line:#e3e7ee; --bg:#f4f6fa; --card:#fff;
+    --orange:#f7701b; --green:#1e5b41;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Noto Sans JP","Yu Gothic Medium","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;color:var(--ink);background:var(--bg);line-height:1.8;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .inner{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+  header.hero{background:linear-gradient(120deg,var(--navy-d) 0%,var(--navy) 70%,#1b64c4 100%);color:#fff;padding:52px 0 42px;}
+  .hero .en{letter-spacing:.35em;font-size:12px;font-weight:700;color:#9fc0ef;}
+  .hero h1{font-size:30px;margin-top:10px;line-height:1.5;}
+  .hero p.sub{margin-top:12px;color:#cfdff5;font-size:14px;}
+  .hero .meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px;font-size:12.5px;color:#e7effc;}
+  .hero .meta span{background:rgba(255,255,255,.12);border-radius:999px;padding:5px 18px;}
+
+  /* 3つのまとまりの案内 */
+  .guide{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:-24px;}
+  .guide a{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;box-shadow:0 4px 16px rgba(20,40,90,.08);display:flex;gap:12px;align-items:center;transition:.15s;}
+  .guide a:hover{border-color:var(--navy);}
+  .guide .no{flex:0 0 34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .guide b{display:block;color:var(--navy-d);font-size:15px;line-height:1.4;}
+  .guide small{color:var(--gray);font-size:12px;line-height:1.5;display:block;}
+
+  section{padding:46px 0 4px;}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:4px;}
+  .sec-head .no{width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;}
+  .sec-head h2{font-size:21px;color:var(--navy-d);}
+  .sec-desc{font-size:13px;color:var(--gray);margin:0 0 18px 40px;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .grid.g4{grid-template-columns:repeat(4,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(20,40,90,.07);transition:.2s;display:flex;flex-direction:column;}
+  .card:hover{transform:translateY(-4px);box-shadow:0 10px 26px rgba(20,40,90,.14);}
+  .card .ph{height:190px;overflow:hidden;background:#eef1f6;border-bottom:1px solid var(--line);position:relative;display:block;}
+  .grid.g4 .card .ph{height:160px;}
+  .card .ph img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+  .badge{position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;color:#fff;border-radius:4px;padding:2px 10px;background:var(--navy);}
+  .badge.a{background:var(--orange);}
+  .badge.b{background:var(--green);}
+  .badge.live{background:#e0534f;}
+  .card .tx{padding:13px 16px 15px;}
+  .card h3{font-size:14.5px;color:var(--navy-d);line-height:1.55;}
+  .card .pg{font-size:11.5px;color:var(--gray);margin-top:3px;display:block;}
+  .card .pg a{color:var(--navy);font-weight:700;text-decoration:underline;}
+
+  /* ログイン情報 */
+  .login{background:#fff;border:2px solid var(--navy);border-radius:14px;padding:22px 26px;margin-top:22px;}
+  .login-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .login-h b{font-size:17px;color:var(--navy-d);}
+  .chip{font-size:11px;font-weight:700;border-radius:999px;padding:1px 12px;background:#fff3e6;color:#b04a00;border:1px solid #f0cfa8;}
+  .login-h .dl{margin-left:auto;display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:700;border-radius:999px;padding:7px 18px;}
+  .login-h .dl:hover{background:#0a5bc4;}
+  .login-h .dl::before{content:"⬇ ";}
+  @media(max-width:760px){ .login-h .dl{margin-left:0;} }
+  .login p{font-size:13px;margin-top:8px;}
+  .login .url{display:inline-block;font-weight:700;color:var(--navy);text-decoration:underline;word-break:break-all;}
+  .acc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;}
+  table.acc{width:100%;border-collapse:collapse;font-size:13.5px;}
+  table.acc th,table.acc td{border:1px solid var(--line);padding:7px 14px;text-align:left;}
+  table.acc th{background:var(--navy);color:#fff;font-weight:600;font-size:12.5px;}
+  table.acc td.pw{font-family:Consolas,"Courier New",monospace;font-size:15px;font-weight:700;letter-spacing:.06em;color:var(--navy-d);}
+  table.acc td.who{font-weight:700;}
+  table.acc tr.admin td{background:#f2f6fc;}
+  .login .small{font-size:12px;color:var(--gray);margin-top:12px;line-height:1.75;}
+  .login .small a{color:var(--navy);font-weight:700;text-decoration:underline;}
+
+  /* 補足 */
+  details.rfp{margin-top:26px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 20px;}
+  details.rfp summary{cursor:pointer;padding:14px 0;font-weight:700;color:var(--navy-d);font-size:14px;}
+  details.rfp[open] summary{border-bottom:1px solid var(--line);}
+  table.map{width:100%;border-collapse:collapse;background:#fff;font-size:12.5px;margin:14px 0 18px;}
+  table.map th,table.map td{border-bottom:1px solid var(--line);padding:9px 14px;text-align:left;}
+  table.map th{background:var(--navy);color:#fff;font-weight:600;}
+  table.map td.st{color:var(--green);font-weight:700;}
+  .note{background:#fff8ef;border:1px solid #f0cfa8;border-radius:12px;padding:14px 20px;font-size:12.5px;margin-top:18px;color:#7a5a30;}
+  footer{margin:52px 0 0;padding:22px 0 30px;border-top:1px solid var(--line);color:#9aa3b0;font-size:11.5px;}
+  footer .inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media(max-width:1000px){ .grid.g4{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:760px){
+    .grid,.guide,.acc-wrap{grid-template-columns:1fr;}
+    .grid.g4{grid-template-columns:1fr 1fr;}
+    .grid.g4 .card .ph{height:120px;}
+    .hero h1{font-size:22px;}
+    .guide{margin-top:18px;}
+    .sec-desc{margin-left:0;}
+    section{padding:36px 0 4px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="inner">
+    <div class="en">PROPOSAL INDEX</div>
+    <h1>社会福祉法人 池上長寿園様<br>WEBサイトリニューアル ご提案一覧</h1>
+    <p class="sub">株式会社インフォネット（制作パートナー：株式会社ITLINE）｜2026年8月5日（2026年9月15日 改訂）</p>
+    <div class="meta">
+      <span>公開目標：2027年4月1日</span>
+      <span>予算：800万円程度</span>
+      <span>書面審査：8月31日まで</span>
+      <span>業者選定：9月11日まで</span>
+    </div>
+  </div>
+</header>
+
+<div class="inner">
+  <nav class="guide" aria-label="資料のまとまり">
+    <a href="#proposal"><span class="no">1</span><span><b>ご提案</b><small>提案書・デザイン案・サイトマップ</small></span></a>
+    <a href="#supplement"><span class="no">2</span><span><b>補足資料</b><small>運用・進め方・連絡方法・SEO・会社概要</small></span></a>
+    <a href="#dashboard"><span class="no">3</span><span><b>ダッシュボード</b><small>ヒアリング・進捗・更新依頼の画面</small></span></a>
+  </nav>
+</div>
+
+<!-- ============================== 1 ご提案 ============================== -->
+<section id="proposal">
+  <div class="inner">
+    <div class="sec-head"><span class="no">1</span><h2>ご提案</h2></div>
+    <p class="sec-desc">リニューアルのご提案の本編です。まずはこちらをご覧ください。</p>
+    <div class="grid g4">
+      <a class="card" href="池上長寿園様_御提案書.pdf" target="_blank">
+        <span class="ph"><span class="badge">提案書</span><img src="shots/thumb_deck.png" alt="御提案書"></span>
+        <span class="tx"><h3>御提案書</h3><span class="pg">PDF・16ページ</span></span>
+      </a>
+      <a class="card" href="池上長寿園_デザイン案A_現状ベース改善.html" target="_blank">
+        <span class="ph"><span class="badge a">デザイン案A</span><img src="shots/A_fv_pc.png" alt="デザイン案A"></span>
+        <span class="tx"><h3>デザイン案A｜現状ベース改善（オレンジ×クリーム）</h3><span class="pg">動く画面・PC／スマートフォン対応</span></span>
+      </a>
+      <a class="card" href="池上長寿園_デザイン案B_刷新.html" target="_blank">
+        <span class="ph"><span class="badge b">デザイン案B</span><img src="shots/B_fv_pc.png" alt="デザイン案B"></span>
+        <span class="tx"><h3>デザイン案B｜刷新（深緑×生成り・明朝体）</h3><span class="pg">動く画面・PC／スマートフォン対応</span></span>
+      </a>
+      <div class="card">
+        <a class="ph" href="池上長寿園_想定サイトマップ.html" target="_blank"><span class="badge">サイトマップ</span><img src="shots/sitemap_top.png" alt="想定サイトマップ"></a>
+        <span class="tx"><h3><a href="池上長寿園_想定サイトマップ.html" target="_blank">リニューアル後 想定サイトマップ（案）</a></h3><span class="pg">画面で見る／<a href="池上長寿園様_想定サイトマップ.pdf" download>PDF版（A4横・7ページ）</a></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 2 補足資料 ============================== -->
+<section id="supplement">
+  <div class="inner">
+    <div class="sec-head"><span class="no">2</span><h2>補足資料</h2></div>
+    <p class="sec-desc">ご質問・ご要望にお答えする資料と、会社としての体制をまとめた資料です。</p>
+    <div class="grid">
+      <a class="card" href="池上長寿園様_運用サポート体制のご説明.pdf" target="_blank">
+        <span class="ph"><span class="badge">運用サポート</span><img src="shots/thumb_support.png" alt="運用サポート体制のご説明"></span>
+        <span class="tx"><h3>運用サポート体制のご説明</h3><span class="pg">PDF・22ページ</span></span>
+      </a>
+      <a class="card" href="池上長寿園様_プロジェクトの進め方.pdf" target="_blank">
+        <span class="ph"><span class="badge">進め方</span><img src="shots/thumb_guide.png" alt="プロジェクトの進め方"></span>
+        <span class="tx"><h3>プロジェクトの進め方（スケジュール・ダッシュボード・移行計画）</h3><span class="pg">PDF・23ページ</span></span>
+      </a>
+      <a class="card" href="池上長寿園様_ご連絡方法と更新代行のご案内.pdf" target="_blank">
+        <span class="ph"><span class="badge">連絡・更新代行</span><img src="shots/thumb_contact.png" alt="ご連絡方法と更新代行のご案内"></span>
+        <span class="tx"><h3>ご連絡方法と更新代行のご案内</h3><span class="pg">PDF・11ページ</span></span>
+      </a>
+      <a class="card" href="池上長寿園様_SEO対策と構造化データのご案内.pdf" target="_blank">
+        <span class="ph"><span class="badge">SEO</span><img src="shots/thumb_seo.png" alt="SEO対策と構造化データのご案内"></span>
+        <span class="tx"><h3>SEO対策と構造化データ（JSON-LD）のご案内</h3><span class="pg">PDF・8ページ</span></span>
+      </a>
+      <a class="card" href="池上長寿園様_追加資料.pdf" target="_blank">
+        <span class="ph"><span class="badge">会社概要・実績</span><img src="shots/thumb_extra.png" alt="追加資料"></span>
+        <span class="tx"><h3>追加資料（セキュリティ・会社概要・実績）</h3><span class="pg">PDF・22ページ</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 3 ダッシュボード ============================== -->
+<section id="dashboard">
+  <div class="inner">
+    <div class="sec-head"><span class="no">3</span><h2>ダッシュボード</h2></div>
+    <p class="sec-desc">プロジェクトで使う画面です。ヒアリングダッシュボードは実際にログインしてお使いいただけます。</p>
+    <div class="grid">
+      <a class="card" href="https://itline-pf.com/pj-6d4ddf873d/" target="_blank" rel="noopener">
+        <span class="ph"><span class="badge live">ログインして使えます</span><img src="shots/thumb_hearing.png" alt="ヒアリングダッシュボード"></span>
+        <span class="tx"><h3>関係者ヒアリング ダッシュボード</h3><span class="pg">ログイン情報は下の表をご覧ください</span></span>
+      </a>
+      <a class="card" href="池上長寿園様_進捗ダッシュボード.html" target="_blank">
+        <span class="ph"><span class="badge">画面イメージ</span><img src="shots/dash_full.png" alt="進捗ダッシュボード"></span>
+        <span class="tx"><h3>進捗ダッシュボード</h3><span class="pg">サンプルデータ・PC／スマートフォン対応</span></span>
+      </a>
+      <a class="card" href="池上長寿園様_更新依頼ダッシュボード.html" target="_blank">
+        <span class="ph"><span class="badge">画面イメージ</span><img src="shots/req_full.png" alt="更新依頼ダッシュボード"></span>
+        <span class="tx"><h3>更新依頼ダッシュボード</h3><span class="pg">サンプルデータ・PC／スマートフォン対応</span></span>
+      </a>
+    </div>
+
+    <div class="login" id="login">
+      <div class="login-h"><b>ヒアリングダッシュボードのログイン情報</b><span class="chip">デモ期間中</span><a class="dl" href="池上長寿園様_ヒアリングダッシュボード_ログイン情報.pdf" download>PDFでダウンロード（印刷用・A4）</a></div>
+      <p>ログイン画面：<a class="url" href="https://itline-pf.com/pj-6d4ddf873d/" target="_blank" rel="noopener">https://itline-pf.com/pj-6d4ddf873d/</a><br>ログイン画面で「所属（施設・部署）」を選び、下の表のパスワードを入力してください。</p>
+      <div class="acc-wrap">
+        <table class="acc">
+          <tr><th>所属（施設）</th><th>パスワード</th></tr>
+          <tr><td class="who">大森</td><td class="pw">dgyr5389</td></tr>
+          <tr><td class="who">池上</td><td class="pw">rpzq5756</td></tr>
+          <tr><td class="who">蒲田</td><td class="pw">ctud9859</td></tr>
+          <tr><td class="who">糀谷</td><td class="pw">cbkw4472</td></tr>
+          <tr><td class="who">馬込</td><td class="pw">qfju6623</td></tr>
+        </table>
+        <table class="acc">
+          <tr><th>所属（施設・本部）</th><th>パスワード</th></tr>
+          <tr><td class="who">羽田</td><td class="pw">tkms6269</td></tr>
+          <tr><td class="who">たまがわ</td><td class="pw">anuz5367</td></tr>
+          <tr class="admin"><td class="who">経営企画課（とりまとめ）</td><td class="pw">nqtu7836</td></tr>
+          <tr><td class="who">採用担当</td><td class="pw">hfpp8785</td></tr>
+          <tr><td class="who">法人本部</td><td class="pw">ddky4487</td></tr>
+        </table>
+      </div>
+      <p class="small">
+        ※ 各施設・部署：自施設の回答、写真の送付（1施設10枚まで）、全体タブと自施設タブへのコメントができます。<br>
+        ※ 経営企画課：すべてのタブへのコメント、紙で回答された内容の代理入力、まとめ欄の記入・確定ができます。<br>
+        ※ デモ期間中の共通のログイン情報です。本番の運用を始める時点でパスワードを変更し、あらためてお知らせします。<br>
+        ※ 画面の使い方だけをご覧になる場合は、<a href="池上長寿園様_ヒアリングダッシュボード.html" target="_blank">画面イメージ（サンプルデータ）</a>もご利用いただけます。
+      </p>
+    </div>
+
+    <details class="rfp">
+      <summary>提案依頼書（RFP）のご要件と資料の対応（クリックで開きます）</summary>
+      <table class="map">
+        <tr><th>提案依頼書のご要件</th><th>対応資料</th></tr>
+        <tr><td>提案資料（デザイン案2案以上）</td><td class="st">✔ 御提案書＋デザイン案A／B</td></tr>
+        <tr><td>リニューアル後の想定サイトマップ</td><td class="st">✔ 想定サイトマップ（画面／PDF・7ページ）</td></tr>
+        <tr><td>御見積書（明細付・一式不可）</td><td class="st">✔ 別途ご提示（全項目明細）</td></tr>
+        <tr><td>詳細なスケジュール表</td><td class="st">✔ 御提案書 P14</td></tr>
+        <tr><td>体制（構築時・運用時）</td><td class="st">✔ 御提案書 P13＋追加資料 P11</td></tr>
+        <tr><td>会社概要・実績</td><td class="st">✔ 御提案書 P16＋追加資料 P13〜P22</td></tr>
+        <tr><td>ISMS等の情報セキュリティ</td><td class="st">✔ 御提案書 P16（ISO27001／27017 登録番号明記）＋追加資料 P3〜P4</td></tr>
+        <tr><td>現行環境・データ移行</td><td class="st">✔ プロジェクトの進め方 第3部（移行計画編）</td></tr>
+        <tr><td>運用体制・サポート（ヘルプデスク／研修／更新代行）</td><td class="st">✔ 運用サポート体制のご説明（22ページ）</td></tr>
+        <tr><td>ご連絡手段・更新代行のご依頼方法／超過時の費用／ご自身での更新手順</td><td class="st">✔ ご連絡方法と更新代行のご案内（11ページ）</td></tr>
+        <tr><td>GA4の設定・検索対策（SEO）</td><td class="st">✔ 御提案書 P11（GA4設定）＋ SEO対策と構造化データのご案内（8ページ）</td></tr>
+      </table>
+    </details>
+
+    <div class="note">
+      ※ 御見積書は本ページには掲載せず、別途ご提示いたします。<br>
+      ※ デザイン案の文言・写真の一部はイメージです（メインビジュアル等は制作イメージ。実制作時は実素材・ご提供素材に置き換えます）。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="inner">
+    <span>社会福祉法人 池上長寿園様 WEBサイトリニューアル ご提案一覧</span>
+    <span>© infoNet inc. All Rights Reserved.　CONFIDENTIAL</span>
+  </div>
+</footer>
+
+</body>
+</html>
