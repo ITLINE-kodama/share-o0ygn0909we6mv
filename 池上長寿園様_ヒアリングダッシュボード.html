@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>池上長寿園様 ヒアリングダッシュボード</title>
+<style>
+  :root{
+    --navy:#d95c07; --navy-d:#a3450a; --accent:#f7701b;
+    --ink:#4a3f33; --gray:#7b7166; --head:#3d372f;
+    --line:#e8e2da; --bg:#f7f6f4; --card:#fff; --cream:#fff3e6; --cream2:#fff8f1;
+    --green:#2e8b57; --green-bg:#e8f4ec; --gold:#a06a00; --gold-bg:#fdf3dc;
+    --red:#c0392b; --red-bg:#fbeae8;
+    --bar:#2563eb; --bar2:#9dbdf2; --track:#d7e5fa;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Noto Sans JP","Yu Gothic Medium","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:14px;overflow-x:hidden;}
+  button,input,select,textarea{font-family:inherit;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 20px 50px;}
+  .demo-chip{display:inline-block;background:var(--red-bg);color:var(--red);border:1px solid #f0c9c4;border-radius:999px;font-size:10.5px;font-weight:700;padding:0 10px;margin-left:10px;vertical-align:1px;letter-spacing:.04em;}
+
+  /* ヘッダー */
+  header.top{background:#fff;padding:16px 0 14px;border-top:2px solid var(--accent);}
+  .top .inner{max-width:1240px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  .top .en{font-size:10.5px;letter-spacing:.3em;color:var(--gray);font-weight:700;}
+  .top h1{font-size:21px;line-height:1.4;color:var(--head);}
+  .top .sub{font-size:12.5px;color:var(--gray);}
+  .top .right{display:flex;gap:12px;align-items:center;}
+  .login{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:12px;color:var(--gray);flex-wrap:wrap;}
+  .login select{border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:13px;font-weight:700;color:var(--head);background:#fff;cursor:pointer;}
+  .login .lh{font-size:11px;color:#b3a898;}
+  .cd{background:#fff;border:1px solid var(--line);border-radius:12px;padding:5px 18px;text-align:center;}
+  .cd .l{font-size:10.5px;color:var(--gray);}
+  .cd .n{font-size:22px;font-weight:700;line-height:1.2;color:var(--head);}
+  .cd .n small{font-size:12px;font-weight:500;color:var(--gray);}
+
+  /* タブ */
+  .tabs{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(120,80,40,.04);}
+  .tabs .inner{max-width:1240px;margin:0 auto;padding:0 20px;display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:thin;}
+  .tab{flex:0 0 auto;border:0;background:none;padding:12px 14px 11px;font-size:14px;font-weight:700;color:var(--gray);cursor:pointer;border-bottom:3px solid transparent;display:flex;align-items:center;gap:7px;white-space:nowrap;}
+  .tab:hover{color:var(--head);}
+  .tab.on{color:var(--head);border-bottom-color:var(--accent);}
+  .tab .dot{width:9px;height:9px;border-radius:50%;background:#d9d3ca;flex:0 0 9px;}
+  .tab .dot.done{background:var(--green);}
+  .tab .dot.part{background:#e0a100;}
+  .tab .cmn{font-size:10.5px;font-weight:700;background:var(--red);color:#fff;border-radius:999px;padding:0 6px;line-height:1.6;min-width:18px;text-align:center;}
+  .tabs .gap{flex:0 0 1px;background:var(--line);margin:10px 8px;}
+  .tabs .grp{align-self:center;font-size:10.5px;color:#b3a898;padding:0 4px 0 2px;white-space:nowrap;}
+  .legend2{display:flex;gap:14px;font-size:11.5px;color:var(--gray);margin-top:12px;flex-wrap:wrap;}
+  .legend2 span{display:inline-flex;align-items:center;gap:5px;}
+  .legend2 i{width:9px;height:9px;border-radius:50%;display:inline-block;background:#d9d3ca;}
+
+  /* 共通パーツ */
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 3px 12px rgba(120,80,40,.06);}
+  .btn{border:0;border-radius:12px;background:var(--navy);color:#fff;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 3px 10px rgba(217,92,7,.28);}
+  .btn:hover{background:#c2560a;}
+  .btn.mid{font-size:14px;padding:11px 22px;}
+  .btn.sm{font-size:13px;padding:8px 14px;border-radius:10px;}
+  .btn.ghost{background:#fff;color:var(--head);border:1px solid var(--line);box-shadow:none;}
+  .btn.ghost:hover{background:#faf8f5;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  h2.sec{font-size:16px;color:var(--head);margin:26px 0 10px;display:flex;align-items:center;gap:10px;}
+  h2.sec::before{content:"";width:3px;height:17px;background:var(--accent);border-radius:2px;display:inline-block;}
+  h2.sec .note{font-size:12px;color:var(--gray);font-weight:400;}
+  .st{font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 11px;white-space:nowrap;}
+  .st.done{background:var(--green-bg);color:var(--green);}
+  .st.part{background:var(--gold-bg);color:var(--gold);}
+  .st.none{background:#f1efec;color:var(--gray);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card-h{padding:12px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:700;color:var(--head);display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .card-h small{font-size:12px;color:var(--gray);font-weight:400;}
+  .card-b{padding:12px 18px 16px;}
+
+  /* 全体タブ */
+  .kpis{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:14px;margin-top:22px;}
+  .kpi{padding:14px 20px;}
+  .kpi .l{font-size:12px;color:var(--gray);}
+  .kpi .v{font-size:26px;font-weight:700;color:var(--head);line-height:1.25;}
+  .kpi .v small{font-size:13px;color:var(--gray);font-weight:500;margin-left:3px;}
+  .kpi .row{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;}
+  .bar{height:12px;border-radius:999px;background:var(--track);margin-top:10px;overflow:hidden;display:flex;}
+  .bar i{display:block;height:100%;}
+  .points{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .pt{padding:14px 18px;}
+  .pt .l{font-size:12px;color:var(--gray);}
+  .pt b{display:block;font-size:17px;color:var(--head);line-height:1.4;margin-top:2px;}
+  .pt span{font-size:12.5px;color:var(--gray);}
+  .rank li{list-style:none;display:grid;grid-template-columns:130px 1fr 38px;gap:10px;align-items:center;margin:8px 0;font-size:13.5px;}
+  .rank .lb{color:var(--ink);line-height:1.35;}
+  .rank .tr{height:10px;border-radius:999px;background:#eef3fb;overflow:hidden;}
+  .rank .fi{display:block;height:100%;background:var(--bar2);border-radius:999px;}
+  .rank li.top .fi{background:var(--bar);}
+  .rank li.top .lb{font-weight:700;color:var(--head);}
+  .rank .ct{text-align:right;font-weight:700;color:var(--head);}
+  .design-sum{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .ds{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center;}
+  .ds.top{border:2px solid var(--accent);background:var(--cream2);}
+  .ds b{display:block;font-size:12.5px;color:var(--head);margin-top:6px;}
+  .ds .v{font-size:18px;font-weight:700;color:var(--head);line-height:1.2;}
+  .ds .v small{font-size:11px;color:var(--gray);font-weight:500;}
+  .colors{display:flex;flex-wrap:wrap;gap:8px;}
+  .cl{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:10px;padding:5px 10px;font-size:13px;}
+  .cl i{display:inline-flex;border-radius:5px;overflow:hidden;width:28px;height:18px;border:1px solid rgba(0,0,0,.08);}
+  .cl i em{flex:1;}
+  .cl b{color:var(--head);}
+  .tools{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-top:18px;}
+  details.more{margin-top:16px;}
+  details.more summary{cursor:pointer;font-size:13.5px;font-weight:700;color:var(--head);list-style:none;display:inline-flex;align-items:center;gap:6px;padding:6px 2px;}
+  details.more summary::-webkit-details-marker{display:none;}
+  details.more summary::after{content:"＋";color:var(--navy);}
+  details.more[open] summary::after{content:"－";}
+
+  /* 施設タブ */
+  .fhead{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px;}
+  .fhead h2{font-size:24px;color:var(--head);display:flex;align-items:center;gap:12px;}
+  .fhead .meta{font-size:13px;color:var(--gray);margin-top:2px;}
+  .two{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:14px;align-items:start;}
+  .ans{padding:4px 20px 10px;}
+  .ans .who{font-size:12.5px;color:var(--gray);padding:12px 0 2px;border-bottom:1px dashed var(--line);}
+  .ans .who b{color:var(--head);}
+  .ans .row{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid #f3efea;align-items:start;}
+  .ans .row:last-child{border-bottom:0;}
+  .ans .k{font-size:12.5px;color:var(--gray);padding-top:4px;}
+  .chipv{display:inline-block;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 12px;font-size:13.5px;margin:2px 6px 2px 0;color:var(--head);}
+  .chipv.main{background:var(--cream2);border-color:#f0dcc6;font-weight:700;}
+  .chipv.none{color:#b5ada2;background:#fff;border-style:dashed;}
+  .quote{background:#fbfaf8;border-left:3px solid #e8d9c6;border-radius:0 10px 10px 0;padding:8px 12px;font-size:14px;line-height:1.75;white-space:pre-wrap;color:var(--head);}
+  .empty{padding:44px 20px;text-align:center;}
+  .empty b{display:block;font-size:17px;color:var(--head);}
+  .empty p{font-size:13.5px;color:var(--gray);margin:4px 0 16px;}
+
+  /* チャット（コメント・返信） */
+  .cm{padding:12px 16px 14px;}
+  .chh{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:2px 2px 10px;border-bottom:1px solid var(--line);}
+  .chh h3{font-size:15px;color:var(--head);}
+  .chh h3 small{font-size:12px;color:var(--gray);font-weight:400;margin-left:6px;}
+  .chh .hint{font-size:11.5px;color:#b3a898;}
+  .newn{font-size:12px;font-weight:700;color:var(--red);background:var(--red-bg);border-radius:999px;padding:1px 10px;}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 13px;font-size:12.5px;color:var(--gray);cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:5px;}
+  .chip:hover{color:var(--head);}
+  .chip.on{background:var(--cream2);border-color:var(--accent);color:var(--head);}
+  .chip b{min-width:18px;background:var(--red);color:#fff;border-radius:999px;font-size:10.5px;padding:0 5px;line-height:1.6;text-align:center;}
+  .chatwrap{position:relative;}
+  .chat{position:relative;max-height:540px;overflow-y:auto;padding:0 4px 6px 0;}
+  .day{display:flex;align-items:center;gap:10px;margin:12px 0 2px;font-size:11.5px;color:var(--gray);font-weight:700;}
+  .day::before,.day::after{content:"";flex:1;height:1px;background:var(--line);}
+  .day span{background:#f4f1ed;border-radius:999px;padding:1px 12px;}
+  .thr{padding:6px 0 8px;border-bottom:1px solid #f3efea;}
+  .thr:last-child{border-bottom:0;}
+  .msg{display:flex;gap:10px;padding:6px 8px;border-radius:10px;}
+  .msg.new{background:#fff6ec;}
+  .msg .mb{min-width:0;flex:1;}
+  .mh{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--gray);line-height:1.5;}
+  .mh b{color:var(--head);font-size:13.5px;}
+  .role{font-size:10.5px;border:1px solid var(--line);border-radius:5px;padding:0 6px;color:var(--gray);background:#fff;line-height:1.5;}
+  .role.you{border-color:#f0dcc6;color:var(--navy);}
+  .nw{font-size:10px;font-weight:700;color:#fff;background:var(--red);border-radius:4px;padding:0 5px;letter-spacing:.04em;line-height:1.6;}
+  .ctx{font-size:14.5px;color:var(--ink);margin-top:1px;white-space:pre-wrap;word-break:break-word;line-height:1.7;}
+  .ctx.stampmsg{display:inline-block;background:var(--cream2);border:1px solid #f0dcc6;border-radius:999px;padding:1px 14px;font-size:13.5px;font-weight:700;color:var(--head);margin-top:3px;}
+  .av{flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:var(--cream);color:var(--navy);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .av.hq{background:var(--green-bg);color:var(--green);}
+  .av.it{background:#eef3fb;color:#2459b8;font-size:11.5px;}
+  .av.sm{flex:0 0 26px;width:26px;height:26px;font-size:11px;}
+  .reps{margin:2px 0 0 44px;border-left:2px solid #efe9e1;padding-left:6px;}
+  .more-re{border:0;background:none;color:#2459b8;font-size:12.5px;font-weight:700;cursor:pointer;padding:4px 8px;}
+  .more-re:hover{text-decoration:underline;}
+  .rp{border:0;background:none;color:var(--gray);font-size:12.5px;font-weight:700;cursor:pointer;margin:2px 0 0 50px;padding:3px 8px;border-radius:8px;}
+  .rp:hover{background:var(--bg);color:var(--navy);}
+  .rbox{margin:6px 0 2px 50px;padding:8px 10px 6px;background:var(--bg);border-radius:12px;}
+  .rbox .cmf{margin-top:6px;}
+  .lnk{border:0;background:none;color:var(--gray);font-size:12px;cursor:pointer;text-decoration:underline;margin-top:4px;padding:0;}
+  .tolatest{position:absolute;right:14px;bottom:10px;border:1px solid var(--line);background:#fff;color:var(--head);border-radius:999px;padding:6px 14px;font-size:12.5px;font-weight:700;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.12);}
+  .tolatest[hidden]{display:none;}
+  .nocm{color:var(--gray);font-size:13px;padding:18px 4px;}
+  .ftag{border:0;cursor:pointer;font-size:11px;font-weight:700;background:#f1efec;color:var(--gray);border-radius:5px;padding:0 7px;line-height:1.7;font-family:inherit;}
+  .ftag:hover{background:var(--cream);color:var(--navy);}
+  .compose{border-top:1px solid var(--line);margin-top:4px;}
+  .stamps{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+  .stamp{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 13px;font-size:13px;color:var(--head);cursor:pointer;}
+  .stamp:hover{background:var(--cream2);border-color:#f0dcc6;}
+  .stamps.sm{margin-top:0;gap:5px;} .stamps.sm .stamp{font-size:12px;padding:2px 10px;}
+  .cmf{display:grid;grid-template-columns:auto 1fr auto;gap:8px;margin-top:8px;align-items:center;}
+  .cmf input{border:1.5px solid var(--line);border-radius:10px;padding:9px 10px;font-size:14px;color:var(--head);background:#fff;min-width:0;}
+  .cmf input:focus{outline:2px solid #f3c9a3;border-color:var(--accent);}
+  .tocm{display:none;}
+  .cmlock{margin-top:10px;background:var(--bg);border-radius:10px;padding:10px 12px;font-size:12.5px;color:var(--gray);}
+
+  /* まとめタブ */
+  .pl{padding:20px 24px 22px;margin-top:22px;}
+  .pl .phd{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;}
+  .pl .phd h2{font-size:20px;color:var(--head);}
+  .pl .phd p{font-size:13px;color:var(--gray);}
+  .pl .meta{font-size:12px;color:var(--gray);text-align:right;margin-top:4px;}
+  .pl .bar1{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px;padding:12px 14px;background:var(--bg);border-radius:12px;}
+  .pl .bar1 label{font-size:12.5px;font-weight:700;color:var(--head);}
+  .pl .bar1 input{flex:1;min-width:180px;border:1.5px solid var(--line);border-radius:10px;padding:9px 12px;font-size:15px;color:var(--ink);background:#fff;}
+  .pl .bar1 input[readonly]{background:#fbfaf8;border-color:#efe9e1;}
+  .pl .banner{display:none;margin-top:14px;background:var(--green-bg);border:1px solid #bfe0cb;color:var(--green);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:700;}
+  .pl.is-final .banner{display:block;}
+  .pl.is-final .draft-only{display:none !important;}
+  .pl-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+  .plf{border:1px solid var(--line);border-radius:12px;padding:12px 14px 14px;background:#fff;}
+  .plf .lb{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:700;color:var(--head);}
+  .plf .lb i{flex:0 0 24px;height:24px;border-radius:50%;background:var(--cream);color:var(--navy);font-style:normal;font-size:12.5px;display:flex;align-items:center;justify-content:center;}
+  .plf .ref{font-size:12px;color:#2459b8;background:#eef3fb;border-radius:8px;padding:5px 10px;margin-top:8px;line-height:1.55;}
+  .plf textarea{width:100%;min-height:96px;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:15px;line-height:1.75;color:var(--ink);margin-top:8px;resize:vertical;background:#fff;overflow:hidden;}
+  .plf textarea:focus{outline:2px solid #f3c9a3;border-color:var(--accent);}
+  .plf textarea[readonly]{background:#fbfaf8;border-color:#efe9e1;color:var(--head);}
+  .plf .pv{display:none;white-space:pre-wrap;font-size:12.5px;margin-top:6px;}
+  .pl .actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px;}
+  .pl .actions .r{display:flex;gap:10px;flex-wrap:wrap;}
+  .savedmsg{font-size:12.5px;color:var(--green);min-height:18px;}
+
+  /* 見本（CSSで描いたミニ画面・写真・動き） */
+  .mock{height:96px;border-radius:8px;overflow:hidden;position:relative;border:1px solid rgba(0,0,0,.06);}
+  .mock .h{height:16px;}
+  .mock .mv{position:absolute;left:10px;right:10px;top:24px;height:38px;}
+  .mock .t1,.mock .t2{position:absolute;left:10px;height:5px;border-radius:3px;}
+  .mock .t1{top:70px;width:58%;} .mock .t2{top:80px;width:40%;}
+  .mock.warm{background:#fff8ef;} .mock.warm .h{background:#f7a15a;border-radius:0 0 12px 12px;}
+  .mock.warm .mv{background:#ffd9b3;border-radius:18px;} .mock.warm .t1,.mock.warm .t2{background:#e7b58a;}
+  .mock.modern{background:#fff;} .mock.modern .h{background:#fff;border-bottom:1px solid #222;}
+  .mock.modern .mv{background:#e9e9e9;border-radius:0;} .mock.modern .t1{background:#222;height:4px;} .mock.modern .t2{background:#bbb;height:4px;}
+  .mock.trust{background:#f4f7fb;} .mock.trust .h{background:#0b3a78;}
+  .mock.trust .mv{background:#c9d8ee;border-radius:3px;} .mock.trust .t1,.mock.trust .t2{background:#8aa4c8;}
+  .mock.lively{background:#fffdf2;} .mock.lively .h{background:linear-gradient(90deg,#ff8a65,#ffd54f,#81c784,#64b5f6);}
+  .mock.lively .mv{background:linear-gradient(90deg,#ffe0b2 0 33%,#c8e6c9 33% 66%,#bbdefb 66%);border-radius:10px;} .mock.lively .t1{background:#ff8a65;} .mock.lively .t2{background:#64b5f6;}
+  .mock.none{background:repeating-linear-gradient(45deg,#faf8f5 0 8px,#f1ede8 8px 16px);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gray);font-weight:700;}
+  .ds .mock{height:70px;} .ds .mock .mv{top:20px;height:26px;} .ds .mock .t1{top:52px;} .ds .mock .t2{top:60px;}
+  .ph{height:96px;border-radius:8px;overflow:hidden;background:#f1ede8;position:relative;}
+  .ph img{width:100%;height:100%;object-fit:cover;display:block;}
+  .ph.illust{background:#fff6ea;display:flex;align-items:flex-end;justify-content:center;gap:10px;padding-bottom:12px;}
+  .ph.illust i{display:block;border-radius:50% 50% 12px 12px;}
+  .ph.illust i:nth-child(1){width:34px;height:52px;background:#f7a15a;}
+  .ph.illust i:nth-child(2){width:40px;height:64px;background:#8cc9a0;}
+  .ph.illust i:nth-child(3){width:30px;height:46px;background:#8fb6e8;}
+  .mo{height:96px;border-radius:8px;background:#f7f6f4;position:relative;overflow:hidden;}
+  .mo i{position:absolute;width:26px;height:26px;border-radius:50%;background:var(--accent);top:35px;left:12px;}
+  .mo.strong i{animation:mvStrong 1.6s ease-in-out infinite;}
+  .mo.soft i{left:calc(50% - 13px);animation:mvSoft 2.8s ease-in-out infinite;}
+  .mo.still i{left:calc(50% - 13px);opacity:.85;}
+  @keyframes mvStrong{0%{left:12px;transform:scale(1)}50%{left:calc(100% - 38px);transform:scale(1.25)}100%{left:12px;transform:scale(1)}}
+  @keyframes mvSoft{0%,100%{opacity:.35;transform:translateY(6px)}50%{opacity:1;transform:translateY(0)}}
+  @media (prefers-reduced-motion: reduce){ .mo i{animation:none !important;} }
+
+  /* 回答画面 */
+  .wz{position:fixed;inset:0;background:rgba(74,63,51,.5);display:none;z-index:50;}
+  .wz.on{display:flex;align-items:stretch;justify-content:center;}
+  .wz .box{background:#fff;width:100%;max-width:820px;display:flex;flex-direction:column;margin:24px;border-radius:18px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.25);}
+  .wz .hd{padding:14px 24px 10px;border-bottom:1px solid var(--line);}
+  .wz .hd .l1{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .wz .hd .stepno{font-size:12.5px;color:var(--gray);font-weight:700;}
+  .wz .hd .ttl{font-size:20px;font-weight:700;color:var(--head);}
+  .wz .close{background:#fff;border:1px solid var(--line);border-radius:10px;color:var(--gray);font-size:13px;padding:7px 14px;cursor:pointer;white-space:nowrap;}
+  .wz .pbar{height:8px;border-radius:999px;background:var(--track);margin-top:10px;overflow:hidden;}
+  .wz .pbar i{display:block;height:100%;background:var(--bar);border-radius:999px;transition:width .3s;}
+  .wz .saved{font-size:12px;color:var(--green);margin-top:4px;min-height:18px;}
+  .wz .bd{flex:1;overflow-y:auto;padding:0 24px 28px;font-size:16px;}
+  .wz .lead{font-size:14.5px;color:var(--gray);margin-top:12px;}
+  .wz .ft{padding:12px 24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fcfbfa;}
+  .qb{margin-top:24px;}
+  .qb .ql{font-size:17px;font-weight:700;color:var(--head);line-height:1.5;}
+  .qb .req{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:1px 8px;margin-left:8px;vertical-align:2px;}
+  .qb .req.must{background:var(--red-bg);color:var(--red);}
+  .qb .req.opt{background:#f1efec;color:var(--gray);}
+  .qb .req.multi{background:#eef3fb;color:#2459b8;}
+  .qb .err{display:none;font-size:13.5px;color:var(--red);font-weight:700;margin-top:8px;}
+  .qb.ng .err{display:block;}
+  .qb.ng .opts,.qb.ng .tx{box-shadow:0 0 0 3px #f6d6d1;border-radius:12px;}
+  .opts{display:grid;gap:10px;margin-top:10px;}
+  .opts.c2{grid-template-columns:1fr 1fr;}
+  .opts.c3{grid-template-columns:repeat(3,1fr);}
+  .op{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:12px;padding:12px 15px;cursor:pointer;background:#fff;font-size:15.5px;color:var(--ink);min-height:54px;line-height:1.45;text-align:left;width:100%;}
+  .op:hover{border-color:#e7c7a6;background:#fffcf8;}
+  .op .mk{flex:0 0 24px;height:24px;border:2px solid #cfc7bc;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;}
+  .op.multi .mk{border-radius:6px;}
+  .op.sel{border-color:var(--accent);background:var(--cream2);box-shadow:0 0 0 1px var(--accent) inset;}
+  .op.sel .mk{background:var(--navy);border-color:var(--navy);}
+  .op.sel .mk::after{content:"";width:7px;height:12px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px);}
+  .op .sw{display:inline-flex;flex:0 0 36px;width:36px;height:24px;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.1);}
+  .op .sw em{flex:1;}
+  .op.card{flex-direction:column;align-items:stretch;padding:9px;gap:8px;}
+  .op.card .cap{display:flex;align-items:flex-start;gap:9px;padding:0 3px 2px;}
+  .op.card .cap span{font-weight:700;font-size:14.5px;color:var(--head);line-height:1.4;}
+  .op.card .cap .mk{flex:0 0 22px;height:22px;margin-top:1px;}
+  .opts.cards .mock,.opts.cards .ph,.opts.cards .mo{height:118px;}
+  .opts.cards .mock .mv{top:28px;height:50px;}
+  .opts.cards .mock .t1{top:88px;} .opts.cards .mock .t2{top:99px;}
+  .opts.cards .mo i{top:46px;}
+  .tx{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 15px;font-size:16px;color:var(--ink);margin-top:10px;background:#fff;}
+  textarea.tx{min-height:110px;resize:vertical;line-height:1.7;}
+  .tx:focus{outline:2px solid #f3c9a3;border-color:var(--accent);}
+  .confirm .grp{margin-top:20px;font-size:15px;font-weight:700;color:var(--head);display:flex;justify-content:space-between;align-items:center;border-left:3px solid var(--accent);padding-left:10px;}
+  .confirm dl{display:grid;grid-template-columns:130px 1fr;gap:0 12px;margin-top:6px;}
+  .confirm dt{font-size:13px;color:var(--gray);padding:8px 0;border-bottom:1px solid #f3efea;}
+  .confirm dd{font-size:15px;color:var(--head);font-weight:700;padding:8px 0;border-bottom:1px solid #f3efea;white-space:pre-wrap;}
+  .confirm dd.empty{color:#b5ada2;font-weight:400;padding:8px 0;text-align:left;}
+  .edit{font-size:13px;color:var(--navy);background:#fff;border:1px solid #f0dcc6;border-radius:8px;cursor:pointer;font-weight:700;padding:4px 12px;}
+  .thanks{text-align:center;padding:48px 10px 20px;}
+  .thanks .mark{width:80px;height:80px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:40px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto;}
+  .thanks h3{font-size:23px;color:var(--head);margin-top:18px;}
+  .thanks p{font-size:15px;color:var(--gray);margin-top:10px;}
+
+  /* 質問項目一覧（印刷用） */
+  .qlist .stp{margin-top:16px;font-size:14px;font-weight:700;color:var(--head);border-bottom:1px solid var(--line);padding-bottom:5px;}
+  .qlist .q{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:8px 0;border-bottom:1px dashed #ece6de;font-size:12.5px;break-inside:avoid;}
+  .qlist .q .no{font-weight:700;color:var(--navy);}
+  .qlist .q .lb{font-weight:700;color:var(--head);}
+  .qlist .q .ops{color:var(--gray);font-size:12px;}
+  .qlist .q .kind{display:inline-block;font-size:10.5px;border-radius:5px;padding:0 7px;margin-left:6px;background:#f1efec;color:var(--gray);font-weight:700;}
+  #printQ{display:none;}
+
+  footer.pg{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);color:#a3968a;font-size:11.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media(max-width:980px){
+    .grid2,.two{grid-template-columns:1fr;}
+    .design-sum{grid-template-columns:repeat(2,1fr);}
+    .kpis{grid-template-columns:1fr 1fr;} .kpis .kpi:first-child{grid-column:1 / -1;}
+  }
+  @media(max-width:760px){
+    .top h1{font-size:17px;}
+    .top .right{width:100%;} .top .right .cd{flex:1;} .top .right .btn{flex:2;}
+    .points{grid-template-columns:1fr;}
+    .ds b{font-size:11.5px;letter-spacing:-.02em;}
+    .fhead h2{font-size:20px;}
+    .ans .row{grid-template-columns:1fr;gap:2px;}
+    .rank li{grid-template-columns:110px 1fr 32px;}
+    .chat{max-height:64vh;} .login .lh{display:none;}
+    .tocm{display:inline-flex;}
+    .reps{margin-left:16px;} .rp,.rbox{margin-left:16px;} .cm{padding:12px 12px 14px;}
+    .pl{padding:16px;} .pl-grid{grid-template-columns:1fr;} .pl .meta{text-align:left;}
+    .wz .box{margin:0;border-radius:0;}
+    .wz .hd,.wz .bd,.wz .ft{padding-left:16px;padding-right:16px;}
+    .opts.c2,.opts.c3{grid-template-columns:1fr;}
+    .opts.cards{grid-template-columns:1fr;}
+    .op.card{flex-direction:row;align-items:center;gap:12px;}
+    .opts.cards .mock,.opts.cards .ph,.opts.cards .mo{flex:0 0 120px;width:120px;height:80px;}
+    .opts.cards .mock .mv{top:22px;height:30px;} .opts.cards .mock .t1{top:58px;} .opts.cards .mock .t2{top:67px;}
+    .opts.cards .mo i{top:27px;}
+    .op.card .cap{flex:1;align-items:center;}
+    .op.card .cap span{font-size:15px;}
+    .confirm dl{grid-template-columns:1fr;} .confirm dt{border-bottom:0;padding-bottom:0;}
+    .wz .ft .btn{padding:13px 18px;font-size:15px;}
+  }
+
+  @media print{
+    @page{size:A4;margin:14mm 12mm;}
+    body{background:#fff;font-size:12px;}
+    header.top,.tabs,.no-print,.wz,footer.pg{display:none !important;}
+    .panel{box-shadow:none;border:1px solid #ddd;}
+    .chat{max-height:none !important;overflow:visible !important;}
+    .compose,.rp,.rbox,.tolatest,.login,.chips{display:none !important;}
+    body.print-q #view{display:none !important;}
+    body.print-q #printQ{display:block !important;}
+    body.print-pl .pl textarea,body.print-pl .pl .ref,body.print-pl .pl .bar1{display:none !important;}
+    body.print-pl .plf .pv{display:block !important;}
+    body.print-pl .pl-grid{grid-template-columns:1fr;} body.print-pl .plf{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="inner">
+    <div>
+      <div class="en">HEARING<span class="demo-chip">画面イメージ（サンプル）</span></div>
+      <h1>ホームページ リニューアル ヒアリング</h1>
+      <div class="sub">社会福祉法人 池上長寿園様　｜　回答期限 10月16日（金）</div>
+      <div class="login"><span>ログイン中</span><select id="meSel" aria-label="ログイン中の施設・部署（デモ用の切り替え）"></select><span class="lh">※画面イメージ用の切り替え。本番はログインした名前で自動表示</span></div>
+    </div>
+    <div class="right">
+      <div class="cd"><div class="l">回答済み</div><div class="n"><span id="hdDone">6</span><small>／<span id="hdAll">10</span></small></div></div>
+      <button class="btn mid" data-open>＋ 回答する</button>
+    </div>
+  </div>
+</header>
+<nav class="tabs" aria-label="表示の切り替え"><div class="inner" id="tabs"></div></nav>
+
+<div class="wrap">
+  <div id="view"></div>
+  <div id="printQ"></div>
+  <footer class="pg">
+    <span>画面イメージ（サンプルデータ）。本番は専用URL＋パスワードでご提供します。</span>
+    <span>© infoNet inc. All Rights Reserved.　CONFIDENTIAL</span>
+  </footer>
+</div>
+
+<div class="wz" id="wz" role="dialog" aria-modal="true" aria-labelledby="wzTtl">
+  <div class="box">
+    <div class="hd">
+      <div class="l1">
+        <div><div class="stepno" id="wzNo">ステップ 1 / 5</div><div class="ttl" id="wzTtl">はじめに</div></div>
+        <button class="close" id="wzClose">閉じる（保存されます）</button>
+      </div>
+      <div class="pbar"><i id="wzBar"></i></div>
+      <div class="saved" id="wzSaved"></div>
+    </div>
+    <div class="bd" id="wzBd"></div>
+    <div class="ft">
+      <button class="btn ghost mid" id="wzBack">← 戻る</button>
+      <button class="btn mid" id="wzNext">次へ →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   設定（他のお客様で使うときは、ここを差し替えてください）
+   ===================================================================== */
+/* タブに並べる施設・部署（紙のヒアリングシート1枚＝1タブ） */
+const GROUPS = [
+  {name:"施設", items:["大森","池上","蒲田","糀谷","馬込","羽田","たまがわ"]},
+  {name:"本部", items:["経営企画課","採用担当","法人本部"]}
+];
+const HQ = ["経営企画課","採用担当","法人本部"];
+const TARGETS = GROUPS.reduce(function(a, g){ return a.concat(g.items); }, []);
+const DEPTS = TARGETS.concat(["その他"]);
+
+const ISSUES = [
+  ["find","探したい情報がどこにあるか分かりにくい"],["old","デザインが古い印象がある"],["sp","スマートフォンで見にくい"],
+  ["small","文字が小さく読みにくい"],["update","更新に手間や時間がかかる"],["recruit","職員の募集（採用）につながっていない"],
+  ["inquiry","ご相談・お問い合わせにつながっていない"],["photo","写真が少ない・古い"]
+];
+
+/* 質問（no＝番号／s＝一覧表示用の短い見出し） */
+const Q = {
+  dept:{no:"基本1", s:"施設・部署", type:"single", must:true, cols:"c3", label:"施設・部署を選んでください",
+        opts:DEPTS.map(function(d){ return [d,d]; })},
+  name:{no:"基本2", s:"記入者", type:"text", label:"記入者のお名前", ph:"（例）池上　※複数名で相談した場合は代表者"},
+  freq:{no:"基本3", s:"HPを見る頻度", type:"single", cols:"c2", label:"ふだん、法人のホームページを見ますか",
+        opts:[["daily","ほぼ毎日見る"],["weekly","週に数回見る"],["monthly","月に数回見る"],["rare","ほとんど見ない"]]},
+  q1:{no:"Q1", s:"一番の課題", type:"single", must:true, cols:"c2", label:"今のホームページで、一番の課題はどれですか",
+      opts:ISSUES.concat([["unknown","特にない・わからない"]])},
+  q2:{no:"Q2", s:"ほかの課題", type:"multi", cols:"c2", label:"ほかにも気になることはありますか", opts:ISSUES},
+  q3:{no:"Q3", s:"困った場面", type:"area", label:"困った場面や、言われたことがあれば教えてください",
+      ph:"（例）ご家族から「面会の手続きがどこに書いてあるか分からない」と聞かれた"},
+  q4:{no:"Q4", s:"雰囲気", type:"visual", must:true, label:"全体の雰囲気は、どれが好みですか",
+      opts:[["warm","やさしい・あたたかい"],["modern","すっきり・モダン"],["trust","信頼感・誠実"],["lively","明るい・にぎやか"],["none","こだわりはない"]]},
+  q5:{no:"Q5", s:"写真", type:"photo", label:"写真の使い方は、どれが好みですか",
+      opts:[["people","人物が中心（職員・利用者の笑顔など）","images/recruit_team.png"],["place","風景が中心（建物・庭など）","images/fac_ikegami.jpg"],
+            ["illust","イラストが中心",""],["balance","人物と風景をバランスよく","images/fac_collage_clean.jpg"],["none","こだわりはない",""]]},
+  q6:{no:"Q6", s:"動き", type:"motion", label:"画面の動き（アニメーション）は、どれが好みですか",
+      opts:[["strong","しっかり動いて印象的に"],["soft","ほどよく・やさしく動く"],["still","動きは控えめ・なし"],["none","こだわりはない"]]},
+  q7:{no:"Q7", s:"色", type:"color", label:"使いたい色はありますか",
+      opts:[["orange","今のオレンジを活かす",["#f7701b","#fff3e6"]],["green","緑（安心・自然）",["#2e8b57","#e8f4ec"]],["blue","青（信頼・清潔）",["#2563eb","#e6efff"]],
+            ["pink","ピンク（やさしさ）",["#e98aa6","#fdeef3"]],["beige","茶・ベージュ（落ち着き）",["#9c7a55","#f3ebe0"]],["none","こだわりはない",["#ffffff","#f1efec"]]]},
+  q8:{no:"Q8", s:"参考サイト", type:"text", label:"参考にしたいホームページがあれば教えてください", ph:"（例）〇〇福祉会のホームページ"},
+  q9:{no:"Q9", s:"伝えたいこと", type:"multi", cols:"c2", label:"もっと伝えたいことはどれですか",
+      opts:[["atmosphere","施設の雰囲気・設備"],["staff","職員の人柄・働く様子"],["service","サービス内容と料金の目安"],["recruit","職員募集の情報"],
+            ["event","行事・イベントの様子"],["philosophy","法人の理念・歩み"],["community","地域とのつながり・活動"]]},
+  q10:{no:"Q10", s:"大切なこと", type:"single", cols:"c2", label:"見る方にとって、一番大切なことはどれですか",
+       opts:[["small","文字の大きさ・読みやすさ"],["find","探したい情報にすぐたどり着けること"],["photo","写真で雰囲気が伝わること"],["sp","スマートフォンでの見やすさ"]]},
+  q11:{no:"Q11", s:"更新作業", type:"single", cols:"c2", label:"公開後の更新作業は、どうしたいですか",
+       opts:[["self","自分たちで更新したい"],["request","依頼して、代わりに更新してほしい"],["mix","内容によって使い分けたい"],["none","更新作業にはかかわらない"]]},
+  q12:{no:"Q12", s:"期待すること", type:"area", label:"リニューアルに期待すること・ご意見", ph:"自由にお書きください"}
+};
+/* 集計・一覧で使う短い言葉 */
+const SHORT = {
+  q1:{find:"情報が探しにくい",old:"デザインが古い",sp:"スマホで見にくい",small:"文字が小さい",update:"更新が大変",recruit:"採用につながらない",inquiry:"問合せにつながらない",photo:"写真が少ない・古い",unknown:"特になし"},
+  q4:{warm:"やさしい・あたたかい",modern:"すっきり・モダン",trust:"信頼感・誠実",lively:"明るい・にぎやか",none:"こだわりなし"},
+  q5:{people:"人物中心",place:"風景中心",illust:"イラスト中心",balance:"人物と風景をバランスよく",none:"こだわりなし"},
+  q6:{strong:"しっかり動く",soft:"ほどよく動く",still:"控えめ・なし",none:"こだわりなし"},
+  q7:{orange:"オレンジ",green:"緑",blue:"青",pink:"ピンク",beige:"茶・ベージュ",none:"こだわりなし"},
+  q9:{atmosphere:"施設の雰囲気",staff:"職員の様子",service:"サービス・料金",recruit:"職員募集",event:"行事・イベント",philosophy:"理念・歩み",community:"地域とのつながり"},
+  q10:{small:"読みやすさ",find:"探しやすさ",photo:"写真で伝わる",sp:"スマホ対応"},
+  q11:{self:"自分たちで更新",request:"代行に依頼",mix:"使い分け",none:"かかわらない"},
+  freq:{daily:"ほぼ毎日",weekly:"週に数回",monthly:"月に数回",rare:"ほとんど見ない"}
+};
+SHORT.q2 = SHORT.q1;
+
+const STEPS = [
+  {ttl:"はじめに", lead:"施設・部署を選んでください。", qs:["dept","name","freq"]},
+  {ttl:"今のホームページ", lead:"ふだん感じていることを選んでください。", qs:["q1","q2","q3"]},
+  {ttl:"デザインの好み", lead:"近い見本を選んでください。正解はありません。", qs:["q4","q5","q6","q7","q8"]},
+  {ttl:"伝えたいこと", lead:"大切にしたいことを選んでください。", qs:["q9","q10","q11"]},
+  {ttl:"さいごに", lead:"自由にお書きください（なければ、そのまま次へ）。", qs:["q12"]}
+];
+
+/* ---------- サンプルデータ ---------- */
+const SAMPLE = [
+  {dept:"経営企画課", name:"Aさん", date:"10/5（月）", freq:"daily", q1:"find", q2:["update","sp","photo"],
+   q3:"ご家族から「面会の手続きがどこに書いてあるか分からない」と電話で聞かれることが多いです。",
+   q4:"warm", q5:"balance", q6:"soft", q7:["orange","green"], q8:"", q9:["atmosphere","service","recruit"], q10:"find", q11:"self",
+   q12:"情報を整理して、管理しやすいホームページになると助かります。"},
+  {dept:"池上", name:"Bさん", date:"10/5（月）", freq:"weekly", q1:"update", q2:["find","old"],
+   q3:"行事のお知らせを本部にお願いしても、掲載まで時間がかかります。",
+   q4:"modern", q5:"people", q6:"soft", q7:["orange"], q8:"", q9:["event","atmosphere"], q10:"find", q11:"mix",
+   q12:"施設ごとに、お知らせを載せられるようにしてほしいです。"},
+  {dept:"採用担当", name:"Cさん", date:"10/6（火）", freq:"weekly", q1:"recruit", q2:["photo","sp","old"],
+   q3:"応募される方の多くがスマートフォンで見ていますが、求人のページが見にくいと言われました。",
+   q4:"warm", q5:"people", q6:"strong", q7:["orange","pink"], q8:"他法人の採用サイト（職員インタビューのあるもの）", q9:["staff","recruit"], q10:"sp", q11:"request",
+   q12:"職員の働く様子が伝わる写真を増やしたいです。"},
+  {dept:"大森", name:"Dさん", date:"10/7（水）", freq:"monthly", q1:"find", q2:["small","photo"], q3:"",
+   q4:"warm", q5:"place", q6:"still", q7:["green","beige"], q8:"", q9:["atmosphere","event"], q10:"small", q11:"request",
+   q12:"文字を大きくして、ご高齢の方にも読みやすくしてほしいです。"},
+  {dept:"蒲田", name:"Eさん", date:"10/8（木）", freq:"rare", q1:"small", q2:["find","sp"],
+   q3:"利用者のご家族から、文字が小さくて読みにくいと言われたことがあります。",
+   q4:"trust", q5:"balance", q6:"still", q7:["orange","green"], q8:"", q9:["service","atmosphere"], q10:"small", q11:"none", q12:""},
+  {dept:"法人本部", name:"Fさん", date:"10/9（金）", freq:"weekly", q1:"find", q2:["update","inquiry"], q3:"",
+   q4:"warm", q5:"balance", q6:"soft", q7:["orange"], q8:"", q9:["philosophy","community","recruit"], q10:"find", q11:"mix",
+   q12:"法人全体の情報を整理し、管理しやすく、運用を最適化できる仕組みにしてほしい。"}
+];
+const SAMPLE_PART = ["糀谷"];   /* 途中まで入力している施設 */
+
+/* コメント（re=返信先のメッセージ、nw=サンプル上の未読） */
+const COMMENTS = [
+  {id:"c1", th:"全体", by:"経営企画課", d:"10/5", t:"09:30", tx:"ヒアリングを始めました。10/16（金）までに、各施設・部署のご回答をお願いします。"},
+  {id:"c2", th:"全体", re:"c1", by:"大森", d:"10/5", t:"10:02", tx:"承知しました。今週中に回答します。"},
+  {id:"c3", th:"全体", re:"c1", by:"池上", d:"10/5", t:"13:15", tx:"確認しました"},
+  {id:"c4", th:"全体", re:"c1", by:"蒲田", d:"10/6", t:"09:10", tx:"紙に書いてから入力してもよいですか？"},
+  {id:"c5", th:"全体", re:"c1", by:"経営企画課", d:"10/6", t:"09:40", tx:"はい。紙に書いた内容を、ここから入力してください。"},
+  {id:"c6", th:"全体", re:"c1", by:"ITLINE", d:"10/6", t:"10:05", tx:"紙用の質問一覧は、全体タブの下にある「質問項目を印刷」から出せます。"},
+  {id:"c7", th:"池上", by:"池上", d:"10/6", t:"14:00", tx:"写真の撮影には、いつでも協力できます。"},
+  {id:"c8", th:"池上", re:"c7", by:"経営企画課", d:"10/6", t:"14:30", tx:"助かります。撮影日は後日ご相談します。"},
+  {id:"c9", th:"採用担当", by:"採用担当", d:"10/6", t:"17:00", tx:"職員募集のページは、応募までの流れを分かりやすくしたいです。"},
+  {id:"c10", th:"採用担当", re:"c9", by:"経営企画課", d:"10/7", t:"09:00", tx:"賛成です"},
+  {id:"c11", th:"大森", by:"経営企画課", d:"10/7", t:"11:00", tx:"文字の大きさのご意見、ありがとうございます。デザイン案で比べられるようにします。"},
+  {id:"c12", th:"全体", by:"ITLINE", d:"10/7", t:"15:20", tx:"集まったデザインの好みは、10/20（火）の打ち合わせでデザイン案の材料にします。"},
+  {id:"c13", th:"全体", re:"c12", by:"経営企画課", d:"10/7", t:"16:00", tx:"ありがとうございます。回答を整理して、まとめタブに書きます。"},
+  {id:"c14", th:"蒲田", by:"蒲田", d:"10/8", t:"09:00", tx:"スマートフォンで見る職員が多いので、スマホの見やすさも大事です。"},
+  {id:"c15", th:"大森", re:"c11", by:"大森", d:"10/8", t:"09:20", tx:"ありがとうございます。利用者のご家族にも見てもらいます。"},
+  {id:"c16", th:"大森", re:"c11", by:"ITLINE", d:"10/8", t:"10:45", tx:"文字の大きさを切り替えるボタンも、デザイン案に入れます。"},
+  {id:"c17", th:"蒲田", re:"c14", by:"ITLINE", d:"10/8", t:"11:10", tx:"スマートフォンでの見え方も、デザイン案でお見せします。"},
+  {id:"c18", th:"全体", by:"法人本部", d:"10/9", t:"09:05", tx:"10/16（金）の締切までに、まだの施設は回答をお願いします。", nw:1},
+  {id:"c19", th:"大森", by:"大森", d:"10/9", t:"10:10", tx:"施設の写真は、新しく撮り直したいです。", nw:1},
+  {id:"c20", th:"大森", re:"c19", by:"経営企画課", d:"10/9", t:"10:30", tx:"撮影の日程は、池上と合わせてご相談しましょう。"},
+  {id:"c21", th:"糀谷", by:"糀谷", d:"10/9", t:"11:25", tx:"途中まで入力しました。写真の質問は、どれを選ぶか迷っています。", nw:1},
+  {id:"c22", th:"全体", re:"c18", by:"糀谷", d:"10/9", t:"11:30", tx:"週明けに回答します。", nw:1},
+  {id:"c23", th:"糀谷", re:"c21", by:"ITLINE", d:"10/9", t:"12:00", tx:"迷ったときは、いちばん近いものを1つ選んでください。", nw:1},
+  {id:"c24", th:"全体", re:"c18", by:"馬込", d:"10/9", t:"13:40", tx:"来週の月曜に回答します。", nw:1},
+  {id:"c25", th:"池上", by:"ITLINE", d:"10/9", t:"16:00", tx:"お知らせの掲載に時間がかかる件、今の手順を教えていただけますか。", nw:1},
+  {id:"c26", th:"池上", re:"c25", by:"池上", d:"10/9", t:"16:40", tx:"あとで回答します", nw:1}
+];
+const STAMPS = ["賛成です","確認しました","ありがとうございます","あとで回答します"];
+const DEMO_TODAY = "10/9";      /* 画面イメージ上の「今日」 */
+const ROLE = {"経営企画課":"とりまとめ", "ITLINE":"制作パートナー"};
+const MEMBERS = ["経営企画課","ITLINE"].concat(GROUPS[0].items, ["採用担当","法人本部"]);
+
+/* まとめ（プロジェクトリーダー記入） */
+const PLF = [
+  {k:"issues", t:"課題（優先順）"},
+  {k:"design", t:"デザインの方向性"},
+  {k:"content", t:"伝えたいこと"},
+  {k:"ops", t:"更新・運用"},
+  {k:"split", t:"意見が分かれた点"},
+  {k:"note", t:"補足・その他"}
+];
+const PL_SAMPLE = {
+  by:"経営企画課 Aさん", status:"draft", updated:"10/9（金）18:10",
+  f:{
+    issues:"1. 情報が探しにくい（3件）。面会の手続きなど、ご家族からの電話につながっている。\n2. 文字が小さい（大森・蒲田）。\n3. 施設のお知らせの掲載に時間がかかる（池上）。",
+    design:"雰囲気は「やさしい・あたたかい」、色は今のオレンジを活かす。\n写真は人物と風景をバランスよく。動きはほどよく。",
+    content:"施設の雰囲気・設備、サービス内容と料金の目安、職員募集。",
+    ops:"施設ごとにお知らせを載せられるようにしたい。自分たちで更新する内容と、代行に頼む内容を分ける。",
+    split:"動き：「しっかり動く」1件／「控えめ・なし」2件。→ デザイン案で比べて決める。",
+    note:"糀谷は回答途中、馬込・羽田・たまがわは未回答。10/16の締切後に追記。"
+  }
+};
+
+/* =====================================================================
+   動作
+   ===================================================================== */
+const LS = {draft:"ikegami_hearing_v2_draft", mine:"ikegami_hearing_v2_mine", cm:"ikegami_hearing_v3_comments", pl:"ikegami_hearing_v2_pl", me:"ikegami_hearing_v3_me", seen:"ikegami_hearing_v3_seen"};
+function lsGet(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+function lsSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function lsDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
+function esc(s){ return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function $(id){ return document.getElementById(id); }
+function has(v){ return Array.isArray(v) ? v.length > 0 : (v != null && String(v).trim() !== ""); }
+function label(qid, v){ const o = (Q[qid].opts || []).find(function(x){ return x[0] === v; }); return o ? o[1] : v; }
+function sl(qid, v){ return (SHORT[qid] && SHORT[qid][v]) || label(qid, v); }
+function display(qid, v, short){
+  if(!has(v)) return "";
+  const f = short ? sl : label;
+  if(Array.isArray(v)) return v.map(function(x){ return f(qid, x); }).join("、");
+  return Q[qid].opts ? f(qid, v) : String(v);
+}
+function nowLabel(){
+  const d = new Date(), p = function(n){ return (n < 10 ? "0" : "") + n; };
+  return (d.getMonth() + 1) + "/" + d.getDate() + "（" + "日月火水木金土".charAt(d.getDay()) + "）" + p(d.getHours()) + ":" + p(d.getMinutes());
+}
+
+let draft = lsGet(LS.draft, null) || {step:0, a:{}};
+let view = "q";
+let pl = lsGet(LS.pl, null) || JSON.parse(JSON.stringify(PL_SAMPLE));
+let tab = (function(){ try{ const h = decodeURIComponent(location.hash.slice(1)); return (h === "全体" || h === "まとめ" || TARGETS.indexOf(h) >= 0) ? h : "全体"; }catch(e){ return "全体"; } })();
+
+function draftStarted(){ return Object.keys(draft.a).some(function(k){ return k !== "dept" && has(draft.a[k]); }); }
+function allResponses(){ return SAMPLE.concat(lsGet(LS.mine, [])); }
+function responsesOf(d){ return allResponses().filter(function(r){ return r.dept === d; }); }
+function statusOf(d){
+  if(responsesOf(d).length) return "done";
+  if(SAMPLE_PART.indexOf(d) >= 0 || (draftStarted() && draft.a.dept === d)) return "part";
+  return "none";
+}
+const STL = {done:"回答済み", part:"途中", none:"未回答"};
+
+/* チャットの状態 */
+let me = (function(){ const v = lsGet(LS.me, null); return MEMBERS.indexOf(v) >= 0 ? v : "経営企画課"; })();
+let seen = lsGet(LS.seen, null);
+if(!Array.isArray(seen)) seen = COMMENTS.filter(function(c){ return !c.nw; }).map(function(c){ return c.id; });
+let snap = [];           /* このタブを開いた時点の新着（開いている間は NEW を残す） */
+let chatFilter = "all";  /* all / 全体 / new */
+let replyTo = null;      /* 返信欄を開いているスレッド */
+let expanded = {};       /* 折りたたみを開いたスレッド */
+let chatScroll = null;   /* 再描画後のスクロール位置 */
+
+function allComments(){ return COMMENTS.concat(lsGet(LS.cm, [])); }
+function commentsOf(th){ return allComments().filter(function(c){ return c.th === th; }); }
+function isSeen(c){ return c.by === me || seen.indexOf(c.id) >= 0; }
+function isNew(c){ return c.by !== me && (snap.indexOf(c.id) >= 0 || seen.indexOf(c.id) < 0); }
+function unreadOf(th){ return commentsOf(th).filter(function(c){ return !isSeen(c); }).length; }
+/* 施設タブに書き込めるのは「その施設・経営企画課・ITLINE」。全体は全員 */
+function canPost(th){ return th === "全体" || me === th || me === "経営企画課" || me === "ITLINE"; }
+function markSeen(th){
+  snap = commentsOf(th).filter(function(c){ return !isSeen(c); }).map(function(c){ return c.id; });
+  if(snap.length){ seen = seen.concat(snap); lsSet(LS.seen, seen); }
+}
+
+/* ---------- タブ ---------- */
+function tabBtn(key, st){
+  const n = key === "まとめ" ? 0 : unreadOf(key);
+  return '<button class="tab' + (tab === key ? " on" : "") + '" data-tab="' + esc(key) + '">' +
+    (st ? '<span class="dot ' + st + '" title="' + STL[st] + '"></span>' : "") + esc(key) +
+    (n ? '<span class="cmn" title="新着コメント">' + n + '</span>' : "") + '</button>';
+}
+function renderTabs(){
+  let h = tabBtn("全体");
+  GROUPS.forEach(function(g){
+    h += '<span class="gap"></span><span class="grp">' + esc(g.name) + '</span>';
+    g.items.forEach(function(d){ h += tabBtn(d, statusOf(d)); });
+  });
+  h += '<span class="gap"></span>' + tabBtn("まとめ");
+  $("tabs").innerHTML = h;
+  const on = document.querySelector(".tab.on");
+  if(on && on.scrollIntoView) on.scrollIntoView({block:"nearest", inline:"center"});
+  const done = TARGETS.filter(function(d){ return statusOf(d) === "done"; }).length;
+  $("hdDone").textContent = done; $("hdAll").textContent = TARGETS.length;
+}
+function setTab(key){
+  tab = key;
+  replyTo = null; chatScroll = null;
+  if($("cmTx")) $("cmTx").value = "";
+  markSeen(key);
+  try{ history.replaceState(null, "", "#" + encodeURIComponent(key)); }catch(e){}
+  renderTabs(); renderView();
+  window.scrollTo(0, 0);
+}
+function renderView(){
+  const keep = $("cmTx") ? $("cmTx").value : "";
+  if(tab === "全体") renderAll();
+  else if(tab === "まとめ") renderSummary();
+  else renderFac(tab);
+  if(keep && $("cmTx")) $("cmTx").value = keep;
+  afterChat();
+}
+
+/* ---------- 集計の部品 ---------- */
+function tally(qid, R){
+  const c = {}; let n = 0;
+  R.forEach(function(r){ const v = r[qid]; if(!has(v)) return; n++; (Array.isArray(v) ? v : [v]).forEach(function(x){ c[x] = (c[x] || 0) + 1; }); });
+  const rows = Q[qid].opts.map(function(o){ return {v:o[0], t:sl(qid, o[0]), c:c[o[0]] || 0, o:o}; })
+    .filter(function(x){ return x.c > 0; }).sort(function(a, b){ return b.c - a.c; });
+  return {n:n, rows:rows};
+}
+function rankHtml(qid, R){
+  const t = tally(qid, R), max = t.rows.length ? t.rows[0].c : 1;
+  return '<ul class="rank">' + (t.rows.map(function(x){
+    return '<li class="' + (x.c === max ? "top" : "") + '"><span class="lb">' + esc(x.t) + '</span><span class="tr"><span class="fi" style="width:' +
+      (x.c / max * 100) + '%"></span></span><span class="ct">' + x.c + '</span></li>';
+  }).join("") || '<li style="color:var(--gray)">まだ回答がありません</li>') + '</ul>';
+}
+function card(title, body, note){
+  return '<div class="panel"><div class="card-h">' + esc(title) + (note ? '<small>' + esc(note) + '</small>' : "") + '</div><div class="card-b">' + body + '</div></div>';
+}
+function mockHtml(v){ return '<div class="mock ' + v + '"><div class="h"></div><div class="mv"></div><div class="t1"></div><div class="t2"></div></div>'; }
+
+/* ---------- 全体タブ ---------- */
+function renderAll(){
+  const R = allResponses();
+  const cnt = {done:0, part:0, none:0};
+  TARGETS.forEach(function(d){ cnt[statusOf(d)]++; });
+  const N = TARGETS.length;
+  let h = '<div class="kpis">' +
+    '<div class="panel kpi"><div class="row"><div><div class="l">回答済みの施設・部署</div><div class="v">' + cnt.done + '<small>／' + N + '</small></div></div>' +
+      '<button class="btn ghost sm no-print" id="copyRemind">未回答の施設へのお知らせ文をコピー</button></div>' +
+      '<div class="bar"><i style="width:' + (cnt.done / N * 100) + '%;background:var(--green)"></i><i style="width:' + (cnt.part / N * 100) + '%;background:#e0a100"></i></div>' +
+      '<div class="legend2"><span><i style="background:var(--green)"></i>回答済み ' + cnt.done + '</span><span><i style="background:#e0a100"></i>途中 ' + cnt.part +
+      '</span><span><i></i>未回答 ' + cnt.none + '</span><span id="copyMsg" style="color:var(--green)"></span></div></div>' +
+    '<div class="panel kpi"><div class="l">回答期限まで</div><div class="v">あと7<small>日</small></div></div>' +
+    '<div class="panel kpi"><div class="l">新着コメント</div><div class="v">' + allComments().filter(isNew).length + '<small>件 ／ 全' + allComments().length + '件</small></div></div></div>';
+
+  const t1 = tally("q1", R), t4 = tally("q4", R), t6 = tally("q6", R);
+  const pt = function(l, t){ return '<div class="panel pt"><div class="l">' + l + '</div><b>' + (t.rows[0] ? esc(t.rows[0].t) : "―") + '</b><span>' + (t.rows[0] ? t.rows[0].c + "件 ／ 回答 " + t.n + "件" : "まだ回答がありません") + '</span></div>'; };
+  h += '<h2 class="sec">いちばん多かった回答</h2><div class="points">' + pt("一番の課題", t1) + pt("雰囲気", t4) + pt("動き", t6) + '</div>';
+  h += '<h2 class="sec">チャット</h2>' + chatPanel("全体");
+
+  const c4 = {}; t4.rows.forEach(function(x){ c4[x.v] = x.c; });
+  const max4 = t4.rows.length ? t4.rows[0].c : 0;
+  const ds = '<div class="design-sum">' + Q.q4.opts.filter(function(o){ return o[0] !== "none"; }).map(function(o){
+    const c = c4[o[0]] || 0;
+    return '<div class="ds' + (c && c === max4 ? " top" : "") + '">' + mockHtml(o[0]) + '<b>' + esc(sl("q4", o[0])) + '</b><div class="v">' + c + '<small>件</small></div></div>';
+  }).join("") + '</div>';
+  const t7 = tally("q7", R);
+  const colors = '<div class="colors">' + (t7.rows.map(function(x){
+    return '<span class="cl"><i><em style="background:' + x.o[2][0] + '"></em><em style="background:' + x.o[2][1] + '"></em></i>' + esc(x.t) + '<b>' + x.c + '</b></span>';
+  }).join("") || '<span style="color:var(--gray)">まだ回答がありません</span>') + '</div>';
+
+  h += '<h2 class="sec">集計 <span class="note">回答 ' + R.length + '件</span></h2><div class="grid2">' +
+    card("一番の課題", rankHtml("q1", R)) + card("雰囲気", ds) +
+    card("写真", rankHtml("q5", R)) + card("動き", rankHtml("q6", R)) +
+    card("色", colors) + card("更新作業", rankHtml("q11", R)) + '</div>' +
+    '<details class="more"><summary>そのほかの集計を見る</summary><div class="grid2" style="margin-top:10px;">' +
+    card("ほかの課題", rankHtml("q2", R)) + card("伝えたいこと", rankHtml("q9", R)) + card("大切なこと", rankHtml("q10", R)) + '</div></details>';
+
+
+  h += '<div class="tools no-print"><button class="btn ghost sm" id="csvBtn">回答一覧をダウンロード（CSV）</button><button class="btn ghost sm" id="printQBtn">質問項目を印刷</button></div>';
+  $("view").innerHTML = h;
+}
+
+/* ---------- 施設タブ ---------- */
+/* ---------- チャット（コメント・返信） ---------- */
+function dayLabel(d){
+  const p = String(d).split("/"), w = "日月火水木金土".charAt(new Date(2026, +p[0] - 1, +p[1]).getDay());
+  return (d === DEMO_TODAY ? "今日　" : "") + p[0] + "月" + p[1] + "日（" + w + "）";
+}
+function nowTime(){ const x = new Date(), z = function(n){ return (n < 10 ? "0" : "") + n; }; return z(x.getHours()) + ":" + z(x.getMinutes()); }
+function avatar(by, sm){
+  const cls = by === "ITLINE" ? " it" : (HQ.indexOf(by) >= 0 ? " hq" : "");
+  return '<div class="av' + cls + (sm ? " sm" : "") + '">' + esc(by === "ITLINE" ? "IT" : String(by || "？").charAt(0)) + '</div>';
+}
+function msgHtml(c, root, tag){
+  const n = isNew(c), when = (!root || c.d === root.d) ? c.t : c.d + " " + c.t;
+  return '<div class="msg' + (root ? " re" : "") + (n ? " new" : "") + '" id="m-' + esc(c.id) + '">' + avatar(c.by, !!root) +
+    '<div class="mb"><div class="mh">' +
+    (tag && c.th !== "全体" ? '<button class="ftag" data-tab="' + esc(c.th) + '" title="' + esc(c.th) + 'のタブを開く">' + esc(c.th) + ' ›</button>' : "") +
+    '<b>' + esc(c.by) + '</b>' + (ROLE[c.by] ? '<span class="role">' + ROLE[c.by] + '</span>' : "") +
+    (c.by === me ? '<span class="role you">あなた</span>' : "") +
+    '<span class="tm">' + esc(when) + '</span>' + (n ? '<span class="nw">NEW</span>' : "") + '</div>' +
+    '<div class="ctx' + (STAMPS.indexOf(c.tx) >= 0 ? " stampmsg" : "") + '">' + esc(c.tx) + '</div></div></div>';
+}
+function threadHtml(root, reps, tag, openAll){
+  /* 返信が3件以上は、最新2件だけ表示（隠れる返信に新着があれば全部表示） */
+  const hide = (reps.length > 2 && !openAll && !expanded[root.id] && !reps.slice(0, -2).some(isNew)) ? reps.length - 2 : 0;
+  let h = '<div class="thr" data-root="' + esc(root.id) + '">' + msgHtml(root, null, tag);
+  if(reps.length){
+    h += '<div class="reps">' + (hide ? '<button class="more-re" data-expand="' + esc(root.id) + '">これまでの返信 ' + hide + '件を表示</button>' : "") +
+      reps.slice(hide).map(function(r){ return msgHtml(r, root, false); }).join("") + '</div>';
+  }
+  if(canPost(root.th)){
+    if(replyTo === root.id){
+      h += '<div class="rbox" id="rbox"><div class="stamps sm">' + STAMPS.slice(0, 3).map(function(s){ return '<button class="stamp" data-stamp-re="' + esc(root.id) + '" data-v="' + esc(s) + '">' + esc(s) + '</button>'; }).join("") + '</div>' +
+        '<div class="cmf">' + avatar(me, true) + '<input id="rin" data-re="' + esc(root.id) + '" placeholder="' + esc(root.by) + 'へ返信" maxlength="200">' +
+        '<button class="btn sm" data-send-re="' + esc(root.id) + '">返信</button></div><button class="lnk" data-cancel-re>やめる</button></div>';
+    }else{
+      h += '<button class="rp no-print" data-reply="' + esc(root.id) + '">↩ 返信する</button>';
+    }
+  }
+  return h + '</div>';
+}
+function chatHtml(list, tag, onlyNew){
+  const reps = {};
+  list.forEach(function(c){ if(c.re) (reps[c.re] = reps[c.re] || []).push(c); });
+  let roots = list.filter(function(c){ return !c.re; });
+  if(onlyNew) roots = roots.filter(function(r){ return isNew(r) || (reps[r.id] || []).some(isNew); });
+  let h = "", day = "";
+  roots.forEach(function(r){
+    if(r.d !== day){ day = r.d; h += '<div class="day"><span>' + dayLabel(r.d) + '</span></div>'; }
+    h += threadHtml(r, reps[r.id] || [], tag, onlyNew);
+  });
+  return h || '<div class="nocm">' + (onlyNew ? "新着はありません。" : "まだコメントはありません。ひとことどうぞ。") + '</div>';
+}
+function composer(th){
+  if(!canPost(th)) return '<div class="cmlock">このタブには、' + esc(th) + '・経営企画課・ITLINE がコメントできます。</div>';
+  return '<div class="compose no-print"><div class="stamps">' + STAMPS.map(function(s){ return '<button class="stamp" data-stamp="' + esc(s) + '">' + esc(s) + '</button>'; }).join("") + '</div>' +
+    '<div class="cmf">' + avatar(me) + '<input id="cmTx" data-th="' + esc(th) + '" placeholder="' + (th === "全体" ? "みなさんへのメッセージ" : "ひとことコメント") + '" maxlength="200">' +
+    '<button class="btn sm" id="cmSend" data-th="' + esc(th) + '">送る</button></div></div>';
+}
+function chatPanel(th){
+  const whole = th === "全体";
+  const list = whole ? allComments() : commentsOf(th);
+  const newN = list.filter(isNew).length;
+  const chip = function(k, t){ return '<button class="chip' + (chatFilter === k ? " on" : "") + '" data-cf="' + k + '">' + t + '</button>'; };
+  const head = whole
+    ? '<div class="chh"><div class="chips">' + chip("all", "すべて") + chip("全体", "全体への連絡") + chip("new", "新着" + (newN ? "<b>" + newN + "</b>" : "")) + '</div>' +
+      (chatFilter === "全体" ? "" : '<span class="hint">施設タブのコメントも表示しています</span>') + '</div>'
+    : '<div class="chh"><h3>コメント<small>' + list.length + '件</small></h3>' + (newN ? '<span class="newn">新着 ' + newN + '件</span>' : "") + '</div>';
+  const shown = whole && chatFilter === "全体" ? commentsOf("全体") : list;
+  return '<div class="panel cm" id="chatPanel">' + head + '<div class="chatwrap"><div class="chat" id="chat">' +
+    chatHtml(shown, whole && chatFilter !== "全体", whole && chatFilter === "new") +
+    '</div><button class="tolatest no-print" id="toLatest" hidden>▼ 最新へ</button></div>' + composer(th) + '</div>';
+}
+function paneTop(){ return $("chat") ? $("chat").scrollTop : 0; }
+function toggleLatest(){ const p = $("chat"), b = $("toLatest"); if(p && b) b.hidden = p.scrollHeight - p.scrollTop - p.clientHeight < 80; }
+function afterChat(){
+  const pane = $("chat"); if(!pane) return;
+  const s = chatScroll; chatScroll = null;
+  if(s){
+    pane.scrollTop = s.top || 0;
+    const el = s.id ? $(s.id) : null;
+    if(el){
+      const top = el.offsetTop, bot = top + el.offsetHeight;
+      if(bot > pane.scrollTop + pane.clientHeight) pane.scrollTop = bot - pane.clientHeight + 12;
+      else if(top < pane.scrollTop) pane.scrollTop = top - 12;
+    }
+  }else{
+    /* 開いたときは、最初の新着へ（なければ最新＝いちばん下へ） */
+    const nw = pane.querySelector(".msg.new");
+    if(nw){
+      const thr = nw.closest(".thr"), prev = thr && thr.previousElementSibling;
+      const at = (thr && thr.firstElementChild === nw) ? ((prev && prev.classList.contains("day")) ? prev : thr) : nw;
+      pane.scrollTop = Math.max(0, at.offsetTop - 6);
+    }else pane.scrollTop = pane.scrollHeight;
+  }
+  pane.onscroll = toggleLatest; toggleLatest();
+}
+function renderFac(d){
+  const rs = responsesOf(d), s = statusOf(d);
+  const KEYS = ["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12"];
+  const row = function(k, r){
+    const q = Q[k], v = r[k];
+    if(q.type === "area" || q.type === "text"){
+      return has(v) ? '<div class="row"><div class="k">' + esc(q.s) + '</div><div class="v"><div class="quote">' + esc(v) + '</div></div></div>' : "";
+    }
+    const val = has(v) ? (Array.isArray(v) ? v : [v]).map(function(x){ return '<span class="chipv' + ((k === "q1" || k === "q4") ? " main" : "") + '">' + esc(sl(k, x)) + '</span>'; }).join("")
+                       : '<span class="chipv none">未回答</span>';
+    return '<div class="row"><div class="k">' + esc(q.s) + '</div><div class="v">' + val + '</div></div>';
+  };
+  let left;
+  if(rs.length){
+    left = '<div class="panel">' + rs.map(function(r){
+      return '<div class="ans">' + (rs.length > 1 || r.name ? '<div class="who"><b>' + esc(r.name || "記入者なし") + '</b>　' + esc(r.date || "") + ' 回答</div>' : "") +
+        KEYS.map(function(k){ return row(k, r); }).join("") + '</div>';
+    }).join("") + '</div>';
+  }else{
+    left = '<div class="panel empty"><b>' + (s === "part" ? "途中まで入力されています" : "まだ回答がありません") + '</b>' +
+      '<p>' + (s === "part" ? "続きの入力をお願いします。" : "紙に記入した内容も、ここから入力できます。") + '</p>' +
+      '<button class="btn mid" data-open-dept="' + esc(d) + '">' + esc(d) + 'として回答する</button></div>';
+  }
+  const right = chatPanel(d);
+  $("view").innerHTML = '<div class="fhead"><div><h2>' + esc(d) + '<span class="st ' + s + '">' + STL[s] + '</span></h2></div>' +
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;">' + (function(){ const L = commentsOf(d), nn = L.filter(isNew).length;
+      return '<button class="btn ghost sm tocm no-print" id="toCm">コメント ' + L.length + '件' + (nn ? '<span class="nw" style="margin-left:6px">新着' + nn + '</span>' : "") + ' ↓</button>'; })() +
+    (rs.length ? '<button class="btn ghost sm no-print" data-open-dept="' + esc(d) + '">＋ 追加で回答する</button>' : "") + '</div></div>' +
+    '<div class="two">' + left + right + '</div>';
+}
+
+function post(th, tx, re){
+  if(!has(tx)){ const i = re ? $("rin") : $("cmTx"); if(i) i.focus(); return; }
+  if(!canPost(th)) return;
+  const c = {id:"u" + Date.now().toString(36) + Math.floor(Math.random() * 1000), th:th, by:me, d:DEMO_TODAY, t:nowTime(), tx:String(tx).trim()};
+  if(re) c.re = re;
+  const mine = lsGet(LS.cm, []); mine.push(c); lsSet(LS.cm, mine);
+  if(re) replyTo = null;
+  else{ if($("cmTx")) $("cmTx").value = ""; if(chatFilter === "new") chatFilter = "all"; }
+  chatScroll = {top:paneTop(), id:"m-" + c.id};
+  renderTabs(); renderView();
+}
+function sendReply(id, tx){
+  const root = allComments().find(function(c){ return c.id === id; });
+  if(root) post(root.th, tx, id);
+}
+
+/* ---------- まとめタブ ---------- */
+function renderSummary(){
+  const R = allResponses();
+  const top = function(q, n){ return tally(q, R).rows.slice(0, n).map(function(x){ return x.t + " " + x.c; }).join("／") || "回答なし"; };
+  const pending = TARGETS.filter(function(d){ return statusOf(d) !== "done"; });
+  const refs = {
+    issues:"参考：" + top("q1", 3),
+    design:"参考：雰囲気 " + top("q4", 1) + "／色 " + top("q7", 1) + "／写真 " + top("q5", 1) + "／動き " + top("q6", 1),
+    content:"参考：" + top("q9", 3),
+    ops:"参考：" + top("q11", 4),
+    split:"参考：" + (splitPoints(R).join("／") || "大きく分かれた項目はありません"),
+    note:"参考：未回答・途中 " + (pending.join("、") || "なし")
+  };
+  $("view").innerHTML = '<div class="panel pl" id="pl">' +
+    '<div class="phd"><div><h2>まとめ</h2><p>各施設の回答をもとに、法人としてのご意見をまとめます。</p></div>' +
+    '<div><span class="st" id="plChip"></span><div class="meta" id="plMeta"></div></div></div>' +
+    '<div class="banner">✓ 確定済みです。制作チームがこの内容で進めます。</div>' +
+    '<div class="bar1"><label for="plBy">記入者</label><input id="plBy" placeholder="（例）経営企画課 池上" value="' + esc(pl.by || "") + '">' +
+    '<button class="btn ghost sm draft-only no-print" id="plDraft">回答から下書きを作る</button></div>' +
+    '<div class="pl-grid">' + PLF.map(function(f, i){
+      const v = (pl.f && pl.f[f.k]) || "";
+      return '<div class="plf"><div class="lb"><i>' + (i + 1) + '</i>' + esc(f.t) + '</div><div class="ref">' + esc(refs[f.k]) + '</div>' +
+        '<textarea data-f="' + f.k + '" placeholder="ご記入ください">' + esc(v) + '</textarea><div class="pv" id="pv_' + f.k + '">' + esc(v || "（未記入）") + '</div></div>';
+    }).join("") + '</div>' +
+    '<div class="actions no-print"><span class="savedmsg" id="plSaved"></span><div class="r">' +
+    '<button class="btn ghost mid" id="plPrint">印刷</button><button class="btn ghost mid" id="plEdit">修正する</button><button class="btn mid" id="plFinal">確定する</button></div></div></div>';
+  plHead(); fitAll();
+}
+function splitPoints(R){
+  const out = [];
+  [["q4","雰囲気"],["q5","写真"],["q6","動き"],["q10","大切なこと"],["q11","更新作業"]].forEach(function(k){
+    const rows = tally(k[0], R).rows.filter(function(x){ return x.v !== "none" && x.v !== "unknown"; });
+    if(rows.length >= 2 && rows[0].c - rows[1].c <= 1) out.push(k[1] + "（" + rows[0].t + " " + rows[0].c + "・" + rows[1].t + " " + rows[1].c + "）");
+  });
+  return out;
+}
+function plHead(){
+  const fin = pl.status === "final";
+  $("pl").classList.toggle("is-final", fin);
+  $("plChip").className = "st " + (fin ? "done" : "part");
+  $("plChip").textContent = fin ? "確定済み" : "下書き";
+  $("plMeta").textContent = pl.updated ? "最終更新 " + pl.updated : "";
+  $("plFinal").style.display = fin ? "none" : "";
+  $("plEdit").style.display = fin ? "" : "none";
+  $("plBy").readOnly = fin;
+  Array.prototype.forEach.call(document.querySelectorAll(".plf textarea"), function(t){ t.readOnly = fin; });
+}
+function fitTA(t){ t.style.height = "auto"; t.style.height = (t.scrollHeight + 4) + "px"; }
+function fitAll(){ Array.prototype.forEach.call(document.querySelectorAll(".plf textarea"), fitTA); }
+function savePL(msg){
+  pl.updated = nowLabel(); lsSet(LS.pl, pl);
+  const el = $("plSaved"); if(el){ el.style.color = ""; el.textContent = "✓ " + (msg || "保存しました"); }
+  plHead();
+}
+function buildDraft(){
+  const R = allResponses();
+  const line = function(q, n){ return tally(q, R).rows.slice(0, n).map(function(x, i){ return (i + 1) + ". " + x.t + "（" + x.c + "件）"; }).join("\n"); };
+  const one = function(q){ const r = tally(q, R).rows[0]; return r ? r.t + "（" + r.c + "件）" : "―"; };
+  const voices = R.filter(function(r){ return has(r.q3); }).slice(0, 2).map(function(r){ return "・" + r.dept + "：" + r.q3; });
+  const sp = splitPoints(R);
+  const pending = TARGETS.filter(function(d){ return statusOf(d) !== "done"; });
+  return {
+    issues:(line("q1", 3) || "（回答なし）") + (voices.length ? "\n" + voices.join("\n") : ""),
+    design:"雰囲気：" + one("q4") + "\n色：" + one("q7") + "\n写真：" + one("q5") + "\n動き：" + one("q6"),
+    content:line("q9", 3) || "（回答なし）",
+    ops:line("q11", 4) || "（回答なし）",
+    split:sp.length ? sp.map(function(x){ return "・" + x; }).join("\n") + "\n→ " : "大きく分かれた項目はありません。",
+    note:pending.length ? "未回答・途中：" + pending.join("、") : ""
+  };
+}
+
+/* ---------- 回答画面 ---------- */
+function openWz(dept){
+  if(dept && draft.a.dept !== dept) draft = {step:0, a:{dept:dept}};
+  view = "q";
+  $("wz").classList.add("on");
+  document.body.style.overflow = "hidden";
+  renderWz();
+}
+function closeWz(){
+  $("wz").classList.remove("on");
+  document.body.style.overflow = "";
+  renderTabs(); renderView();
+}
+let savedTimer = null;
+function saveDraft(){
+  lsSet(LS.draft, draft);
+  $("wzSaved").textContent = "✓ 保存しました";
+  clearTimeout(savedTimer);
+  savedTimer = setTimeout(function(){ $("wzSaved").textContent = ""; }, 2500);
+}
+function optButton(qid, o, multi, inner){
+  const v = draft.a[qid];
+  const sel = multi ? (Array.isArray(v) && v.indexOf(o[0]) >= 0) : v === o[0];
+  return '<button type="button" class="op' + (multi ? " multi" : "") + (inner ? " card" : "") + (sel ? " sel" : "") +
+    '" data-q="' + qid + '" data-v="' + esc(o[0]) + '" aria-pressed="' + sel + '">' +
+    (inner ? inner + '<span class="cap"><span class="mk"></span><span>' + esc(o[1]) + '</span></span>' : '<span class="mk"></span><span>' + esc(o[1]) + '</span>') + '</button>';
+}
+function qBlock(qid){
+  const q = Q[qid], a = draft.a, multi = (q.type === "multi" || q.type === "color");
+  let tag = q.must ? '<span class="req must">必須</span>' : '<span class="req opt">任意</span>';
+  if(multi) tag += '<span class="req multi">いくつでも</span>';
+  let h = '<div class="qb" id="qb_' + qid + '"><div class="ql">' + esc(q.label) + tag + '</div>';
+  if(q.type === "text") h += '<input class="tx" data-q="' + qid + '" value="' + esc(a[qid] || "") + '" placeholder="' + esc(q.ph || "") + '">';
+  else if(q.type === "area") h += '<textarea class="tx" data-q="' + qid + '" placeholder="' + esc(q.ph || "") + '">' + esc(a[qid] || "") + '</textarea>';
+  else if(q.type === "single" || q.type === "multi") h += '<div class="opts ' + (q.cols || "") + '">' + q.opts.map(function(o){ return optButton(qid, o, multi); }).join("") + '</div>';
+  else if(q.type === "visual") h += '<div class="opts c3 cards">' + q.opts.map(function(o){ return optButton(qid, o, false, o[0] === "none" ? '<div class="mock none">こだわりなし</div>' : mockHtml(o[0])); }).join("") + '</div>';
+  else if(q.type === "photo") h += '<div class="opts c3 cards">' + q.opts.map(function(o){
+      const inner = o[0] === "illust" ? '<div class="ph illust"><i></i><i></i><i></i></div>' : o[0] === "none" ? '<div class="mock none">こだわりなし</div>' : '<div class="ph"><img src="' + o[2] + '" alt=""></div>';
+      return optButton(qid, o, false, inner); }).join("") + '</div>';
+  else if(q.type === "motion") h += '<div class="opts c2 cards">' + q.opts.map(function(o){ return optButton(qid, o, false, o[0] === "none" ? '<div class="mock none">こだわりなし</div>' : '<div class="mo ' + o[0] + '"><i></i></div>'); }).join("") + '</div>';
+  else if(q.type === "color") h += '<div class="opts c3">' + q.opts.map(function(o){
+      const v = a[qid], sel = Array.isArray(v) && v.indexOf(o[0]) >= 0;
+      return '<button type="button" class="op multi' + (sel ? " sel" : "") + '" data-q="' + qid + '" data-v="' + o[0] + '" aria-pressed="' + sel + '"><span class="mk"></span><i class="sw"><em style="background:' + o[2][0] + '"></em><em style="background:' + o[2][1] + '"></em></i><span>' + esc(o[1]) + '</span></button>';
+    }).join("") + '</div>';
+  return h + '<div class="err">' + (q.type === "text" ? "入力してください。" : "1つ選んでください。") + '</div></div>';
+}
+function renderWz(){
+  const total = STEPS.length, bd = $("wzBd");
+  $("wzBack").style.visibility = "visible";
+  if(view === "q"){
+    const st = STEPS[draft.step];
+    $("wzNo").textContent = "ステップ " + (draft.step + 1) + " / " + total;
+    $("wzTtl").textContent = st.ttl;
+    $("wzBar").style.width = ((draft.step + 1) / (total + 1) * 100) + "%";
+    bd.innerHTML = '<p class="lead">' + esc(st.lead) + '</p>' + st.qs.map(qBlock).join("");
+    $("wzBack").disabled = draft.step === 0;
+    $("wzNext").textContent = draft.step === total - 1 ? "確認へ →" : "次へ →";
+  }else if(view === "confirm"){
+    $("wzNo").textContent = "確認"; $("wzTtl").textContent = "内容の確認"; $("wzBar").style.width = "92%";
+    bd.innerHTML = '<p class="lead">よろしければ「送信する」を押してください。</p><div class="confirm">' + STEPS.map(function(st, i){
+      return '<div class="grp"><span>' + esc(st.ttl) + '</span><button type="button" class="edit" data-edit="' + i + '">修正</button></div><dl>' +
+        st.qs.map(function(qid){ const d = display(qid, draft.a[qid]); return '<dt>' + esc(Q[qid].s) + '</dt><dd class="' + (d ? "" : "empty") + '">' + (d ? esc(d) : "―") + '</dd>'; }).join("") + '</dl>';
+    }).join("") + '</div>';
+    $("wzBack").disabled = false; $("wzNext").textContent = "送信する";
+  }else{
+    $("wzNo").textContent = "完了"; $("wzTtl").textContent = "送信しました"; $("wzBar").style.width = "100%";
+    bd.innerHTML = '<div class="thanks"><div class="mark">✓</div><h3>ご協力ありがとうございました</h3><p>いただいたご意見は、ホームページの設計に活かします。</p></div>';
+    $("wzBack").style.visibility = "hidden"; $("wzNext").textContent = "閉じる";
+  }
+  bd.scrollTop = 0;
+}
+$("wzBd").addEventListener("click", function(e){
+  const ed = e.target.closest("[data-edit]");
+  if(ed){ draft.step = Number(ed.getAttribute("data-edit")); view = "q"; saveDraft(); renderWz(); return; }
+  const b = e.target.closest(".op"); if(!b) return;
+  const qid = b.getAttribute("data-q"), v = b.getAttribute("data-v"), q = Q[qid], multi = (q.type === "multi" || q.type === "color");
+  if(multi){
+    let arr = Array.isArray(draft.a[qid]) ? draft.a[qid].slice() : [];
+    if(v === "none"){ arr = arr.indexOf("none") >= 0 ? [] : ["none"]; }
+    else{ arr = arr.filter(function(x){ return x !== "none"; }); const i = arr.indexOf(v); if(i >= 0) arr.splice(i, 1); else arr.push(v); }
+    draft.a[qid] = arr;
+  }else draft.a[qid] = v;
+  const blk = $("qb_" + qid);
+  Array.prototype.forEach.call(blk.querySelectorAll(".op"), function(x){
+    const xv = x.getAttribute("data-v"), sel = multi ? draft.a[qid].indexOf(xv) >= 0 : draft.a[qid] === xv;
+    x.classList.toggle("sel", sel); x.setAttribute("aria-pressed", sel);
+  });
+  blk.classList.remove("ng"); saveDraft();
+});
+$("wzBd").addEventListener("input", function(e){
+  const t = e.target; if(!t.classList.contains("tx")) return;
+  draft.a[t.getAttribute("data-q")] = t.value; $("qb_" + t.getAttribute("data-q")).classList.remove("ng"); saveDraft();
+});
+$("wzNext").addEventListener("click", function(){
+  if(view === "q"){
+    const miss = STEPS[draft.step].qs.filter(function(qid){ return Q[qid].must && !has(draft.a[qid]); });
+    if(miss.length){ miss.forEach(function(qid){ $("qb_" + qid).classList.add("ng"); }); $("qb_" + miss[0]).scrollIntoView({behavior:"smooth", block:"center"}); return; }
+    if(draft.step < STEPS.length - 1) draft.step++; else view = "confirm";
+    saveDraft(); renderWz();
+  }else if(view === "confirm"){
+    const mine = lsGet(LS.mine, []);
+    const rec = Object.assign({}, draft.a, {date:nowLabel(), submittedAt:new Date().toISOString()});
+    mine.push(rec); lsSet(LS.mine, mine);
+    draft = {step:0, a:{}}; lsDel(LS.draft);
+    view = "thanks"; renderWz();
+    tab = TARGETS.indexOf(rec.dept) >= 0 ? rec.dept : "全体";
+    try{ history.replaceState(null, "", "#" + encodeURIComponent(tab)); }catch(e){}
+  }else closeWz();
+});
+$("wzBack").addEventListener("click", function(){
+  if(view === "confirm"){ view = "q"; draft.step = STEPS.length - 1; }
+  else if(draft.step > 0) draft.step--;
+  saveDraft(); renderWz();
+});
+$("wzClose").addEventListener("click", closeWz);
+
+/* ---------- クリック・入力（画面全体） ---------- */
+document.addEventListener("click", function(e){
+  const t = e.target.closest("[data-tab],[data-open],[data-open-dept],[data-stamp],[data-cf],[data-reply],[data-cancel-re],[data-send-re],[data-stamp-re],[data-expand],#toLatest,#toCm,#cmSend,#copyRemind,#csvBtn,#printQBtn,#plDraft,#plFinal,#plEdit,#plPrint");
+  if(!t) return;
+  if(t.hasAttribute("data-tab")) return setTab(t.getAttribute("data-tab"));
+  if(t.hasAttribute("data-open")) return openWz(TARGETS.indexOf(tab) >= 0 ? tab : null);
+  if(t.hasAttribute("data-open-dept")) return openWz(t.getAttribute("data-open-dept"));
+  if(t.hasAttribute("data-stamp")) return post($("cmSend").getAttribute("data-th"), t.getAttribute("data-stamp"));
+  if(t.hasAttribute("data-cf")){ chatFilter = t.getAttribute("data-cf"); replyTo = null; return renderView(); }
+  if(t.hasAttribute("data-reply")){
+    replyTo = t.getAttribute("data-reply"); chatScroll = {top:paneTop(), id:"rbox"}; renderView();
+    const r = $("rin"); if(r){ try{ r.focus({preventScroll:true}); }catch(err){ r.focus(); } }
+    return;
+  }
+  if(t.hasAttribute("data-cancel-re")){ replyTo = null; chatScroll = {top:paneTop()}; return renderView(); }
+  if(t.hasAttribute("data-expand")){ expanded[t.getAttribute("data-expand")] = true; chatScroll = {top:paneTop()}; return renderView(); }
+  if(t.hasAttribute("data-send-re")) return sendReply(t.getAttribute("data-send-re"), $("rin") ? $("rin").value : "");
+  if(t.hasAttribute("data-stamp-re")) return sendReply(t.getAttribute("data-stamp-re"), t.getAttribute("data-v"));
+  switch(t.id){
+    case "toCm": { const c = $("chatPanel"); if(c) c.scrollIntoView({behavior:"smooth", block:"start"}); return; }
+    case "toLatest": { const p = $("chat"); if(p){ p.scrollTop = p.scrollHeight; toggleLatest(); } return; }
+    case "cmSend": return post(t.getAttribute("data-th"), $("cmTx").value);
+    case "copyRemind": return copyRemind();
+    case "csvBtn": return downloadCsv();
+    case "printQBtn": return printAs("print-q");
+    case "plDraft":
+      if(PLF.some(function(f){ return pl.f && has(pl.f[f.k]); }) && !window.confirm("入力済みの内容を、回答からの下書きで置き換えます。よろしいですか？")) return;
+      pl.f = buildDraft(); savePL("下書きを作りました"); return renderSummary();
+    case "plFinal":
+      if(!has(pl.by)){ $("plBy").focus(); $("plSaved").style.color = "var(--red)"; $("plSaved").textContent = "記入者を入力してください"; return; }
+      pl.status = "final"; return savePL("確定しました");
+    case "plEdit": pl.status = "draft"; return savePL("修正できます");
+    case "plPrint": return printAs("print-pl");
+  }
+});
+document.addEventListener("input", function(e){
+  const t = e.target;
+  if(t.matches(".plf textarea")){ pl.f = pl.f || {}; pl.f[t.getAttribute("data-f")] = t.value; $("pv_" + t.getAttribute("data-f")).textContent = t.value || "（未記入）"; fitTA(t); savePL(); }
+  else if(t.id === "plBy"){ pl.by = t.value; savePL(); }
+});
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape" && $("wz").classList.contains("on")) return closeWz();
+  if(e.key === "Enter" && !e.isComposing && e.keyCode !== 229){
+    if(e.target.id === "cmTx"){ e.preventDefault(); return post(e.target.getAttribute("data-th"), e.target.value); }
+    if(e.target.id === "rin"){ e.preventDefault(); return sendReply(e.target.getAttribute("data-re"), e.target.value); }
+  }
+  if(e.key === "Escape" && e.target.id === "rin"){ replyTo = null; chatScroll = {top:paneTop()}; return renderView(); }
+});
+document.addEventListener("change", function(e){
+  if(e.target.id === "meSel"){ me = e.target.value; lsSet(LS.me, me); replyTo = null; renderTabs(); renderView(); }
+});
+window.addEventListener("resize", fitAll);
+window.addEventListener("hashchange", function(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  if(h !== tab && (h === "全体" || h === "まとめ" || TARGETS.indexOf(h) >= 0)) setTab(h);
+});
+
+/* ---------- ツール ---------- */
+function clearPrint(){ document.body.classList.remove("print-q", "print-pl"); }
+function printAs(cls){ clearPrint(); document.body.classList.add(cls); window.print(); setTimeout(clearPrint, 800); }
+window.addEventListener("afterprint", clearPrint);
+function copyRemind(){
+  const list = TARGETS.filter(function(d){ return statusOf(d) !== "done"; });
+  const text = "【ホームページ リニューアル ヒアリングのお願い】\n回答期限：10月16日（金）／所要時間：約10分\n下記のページからご回答をお願いいたします。\n（ヒアリングページのURL）\n\n対象：" + list.join("、");
+  const done = function(){ const m = $("copyMsg"); if(m) m.textContent = "✓ コピーしました"; };
+  const fb = function(){ const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); done(); }catch(e){} ta.remove(); };
+  if(navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fb); else fb();
+}
+function downloadCsv(){
+  const cols = ["dept","name","freq","q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12"];
+  const cell = function(s){ return '"' + String(s).replace(/"/g, '""') + '"'; };
+  const lines = [["回答日"].concat(cols.map(function(c){ return Q[c].no + " " + Q[c].s; })).map(cell).join(",")];
+  allResponses().forEach(function(r){ lines.push([r.date || ""].concat(cols.map(function(c){ return display(c, r[c]); })).map(cell).join(",")); });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob(["﻿" + lines.join("\r\n")], {type:"text/csv"}));
+  a.download = "ヒアリング回答一覧.csv"; document.body.appendChild(a); a.click(); a.remove();
+}
+function renderPrintQ(){
+  const KIND = {text:"記述", area:"記述", single:"1つ選ぶ", multi:"いくつでも", visual:"見本から選ぶ", photo:"見本から選ぶ", motion:"見本から選ぶ", color:"いくつでも"};
+  let h = '<div class="qlist"><div style="font-size:17px;font-weight:700;margin:6px 0 2px;">ホームページ リニューアル ヒアリング項目</div>' +
+          '<div style="font-size:11px;color:#777;">株式会社インフォネット（制作パートナー：株式会社ITLINE）</div>';
+  STEPS.forEach(function(st, i){
+    h += '<div class="stp">ステップ' + (i + 1) + '　' + esc(st.ttl) + '</div>';
+    st.qs.forEach(function(qid){
+      const q = Q[qid];
+      h += '<div class="q"><div class="no">' + esc(q.no) + '</div><div><span class="lb">' + esc(q.label) + '</span><span class="kind">' + KIND[q.type] + (q.must ? "・必須" : "") + '</span>' +
+        (q.opts ? '<div class="ops">' + (qid === "dept" ? "お客様の施設・部署に合わせて設定" : q.opts.map(function(o){ return esc(o[1]); }).join("／")) + '</div>' : "") + '</div></div>';
+    });
+  });
+  h += '<div class="stp">まとめ（プロジェクトリーダー記入）</div>' + PLF.map(function(f, i){ return '<div class="q"><div class="no">まとめ' + (i + 1) + '</div><div><span class="lb">' + esc(f.t) + '</span></div></div>'; }).join("");
+  $("printQ").innerHTML = h + '</div>';
+}
+
+$("meSel").innerHTML = MEMBERS.map(function(m){ return '<option' + (m === me ? " selected" : "") + '>' + esc(m) + '</option>'; }).join("");
+markSeen(tab);
+renderPrintQ();
+renderTabs();
+renderView();
+</script>
+</body>
+</html>
